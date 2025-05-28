@@ -65,22 +65,7 @@ const LayoutBase = props => {
   const drawerRight = useRef(null)
   const tocRef = isBrowser ? document.getElementById('article-wrapper') : null
 
-  // 悬浮按钮内容
-  const floatSlot = (
-    <>
-      {post?.toc?.length > 1 && (
-        <div className='block lg:hidden'>
-          <TocDrawerButton
-            onClick={() => {
-              drawerRight?.current?.handleSwitchVisible()
-            }}
-          />
-        </div>
-      )}
-      {post && <ButtonJumpToComment />}
-      {showRandomButton && <ButtonRandomPostMini {...props} />}
-    </>
-  )
+  // 悬浮按钮内容，暂时空
 
   // Algolia搜索框
   const searchModal = useRef(null)
@@ -150,7 +135,7 @@ const LayoutBase = props => {
         </div>
 
         {/* 悬浮菜单 */}
-        <RightFloatArea floatSlot={floatSlot} />
+        <RightFloatArea  />
 
         {/* 全文搜索 */}
         <AlgoliaSearchModal cRef={searchModal} {...props} />
