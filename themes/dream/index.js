@@ -66,20 +66,7 @@ const LayoutBase = props => {
   const tocRef = isBrowser ? document.getElementById('article-wrapper') : null
 
   // 悬浮按钮内容
-  const floatSlot = (
-    <>
-      {post?.toc?.length > 1 && (
-        <div className='block lg:hidden'>
-          <TocDrawerButton
-            onClick={() => {
-              drawerRight?.current?.handleSwitchVisible()
-            }}
-          />
-        </div>
-      )}
-      {post && <ButtonJumpToComment />}
-    </>
-  )
+  const floatSlot = post && <ButtonJumpToComment />
 
   // Algolia搜索框
   const searchModal = useRef(null)
