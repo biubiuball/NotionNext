@@ -47,7 +47,7 @@ const BLOG = {
 
   // 自定义外部脚本，外部样式
   CUSTOM_EXTERNAL_JS: ['https://raw.githubusercontent.com/cpython666/AwesomeWeb/refs/heads/main/%E4%BF%AE%E6%94%B9%E9%BC%A0%E6%A0%87%E6%A0%B7%E5%BC%8F%E4%B8%8E%E6%8C%87%E5%90%91/%E7%B2%BE%E7%AE%80%E7%89%88/script.js'], // e.g. ['http://xx.com/script.js','http://xx.com/script.js']
-  CUSTOM_EXTERNAL_CSS: ['https://raw.githubusercontent.com/cpython666/AwesomeWeb/refs/heads/main/%E4%BF%AE%E6%94%B9%E9%BC%A0%E6%A0%87%E6%A0%B7%E5%BC%8F%E4%B8%8E%E6%8C%87%E5%90%91/%E7%B2%BE%E7%AE%80%E7%89%88/style.css'] // e.g. ['http://xx.com/style.css','http://xx.com/style.css']
+  CUSTOM_EXTERNAL_CSS: ['https://raw.githubusercontent.com/cpython666/AwesomeWeb/refs/heads/main/%E4%BF%AE%E6%94%B9%E9%BC%A0%E6%A0%87%E6%A0%B7%E5%BC%8F%E4%B8%8E%E6%8C%87%E5%90%91/%E7%B2%BE%E7%AE%80%E7%89%88/style.css'], // e.g. ['http://xx.com/style.css','http://xx.com/style.css']
 
   // 自定义菜单
   CUSTOM_MENU: process.env.NEXT_PUBLIC_CUSTOM_MENU || true, // 支持Menu类型的菜单，替代了3.12版本前的Page类型
