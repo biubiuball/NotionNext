@@ -8,14 +8,4 @@
 }
 
 
-* {
-  cursor: none;
-}
-
-
-@media (pointer: coarse) {  /* 检测设备是否使用粗指针（触摸操作） */
-  .custom-cursor {           /* 针对自定义光标的元素 */
-    display: none !important; /* 强制隐藏元素，优先级最高 */
-  }
-}
 
