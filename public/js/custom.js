@@ -143,13 +143,10 @@ else {
 	init() // DOMContentLoaded 已经发生
 }
 
-/* 移动端隐藏自定义光标 */
-@media (pointer: coarse) {
-  .custom-cursor {
-    display: none !important;
-  }
+// 检测是否触摸设备，避免初始化光标逻辑
+if (matchMedia('(pointer: coarse)').matches) {
+  // 跳过自定义光标的JS初始化代码
 }
-
 
 var back = document.getElementById("back")
 var pixaldata = [] //定义数组存放每个span的信息
