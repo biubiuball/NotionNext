@@ -11,3 +11,14 @@
 * {
   cursor: none;
 }
+
+
+span.pixal{
+    position:absolute;
+    left:-5px;
+    top:-5px;
+    width:4px;
+    height:4px;
+    background:white;
+    border-radius: 50%;
+}
