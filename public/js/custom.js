@@ -142,3 +142,10 @@ if (document.readyState === 'loading') {
 else {
 	init() // DOMContentLoaded 已经发生
 }
+
+/* 移动端隐藏自定义光标 */
+@media (pointer: coarse) {
+  .custom-cursor {
+    display: none !important;
+  }
+}
