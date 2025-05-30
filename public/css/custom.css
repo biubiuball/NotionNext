@@ -8,4 +8,33 @@
 }
 
 
+/* 默认状态 */
+.custom-cursor {
+  cursor: url('Vision Cursor White/pointer.cur'), default;
+}
 
+/* 链接状态 */
+.custom-cursor a, 
+.custom-cursor .link {
+  cursor: url('Vision Cursor White/link.cur'), pointer;
+}
+
+/* 进度状态 */
+.custom-cursor .progress {
+  cursor: url('Vision Cursor White/work.gif'), progress;
+}
+
+/* 忙碌状态 */
+.custom-cursor .busy {
+  cursor: url('Vision Cursor White/busy.gif'), wait;
+}
+
+/* 移动状态 */
+.custom-cursor .move {
+  cursor: url('Vision Cursor White/move.cur'), move;
+}
+
+/* 帮助状态 */
+.custom-cursor .help {
+  cursor: url('Vision Cursor White/help.cur'), help;
+}
