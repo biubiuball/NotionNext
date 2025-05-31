@@ -10,13 +10,12 @@
 
 /* 默认状态 */
 .custom-cursor {
-  cursor: url('https://www.oovoo.zone.id/pic/pointer.cur'), default;
+  cursor: url('https://www.oovoo.zone.id/pic/pointer.ico'), default;
 }
 
 /* 链接状态 */
-.custom-cursor a, 
 .custom-cursor .link {
-  cursor: url('https://www.oovoo.zone.id/pic/link.cur'), pointer;
+  cursor: url('https://www.oovoo.zone.id/pic/link.ico'), pointer;
 }
 
 /* 进度状态 */
@@ -31,10 +30,10 @@
 
 /* 移动状态 */
 .custom-cursor .move {
-  cursor: url('https://www.oovoo.zone.id/pic/move.cur'), move;
+  cursor: url('https://www.oovoo.zone.id/pic/move.ico'), move;
 }
 
 /* 帮助状态 */
 .custom-cursor .help {
-  cursor: url('https://www.oovoo.zone.id/pic/help.cur'), help;
+  cursor: url('https://www.oovoo.zone.id/pic/help.ico'), help;
 }
