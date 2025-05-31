@@ -8,23 +8,22 @@
 }
 
 
-/* 默认状态 */
-.custom-cursor {
+/* 全局默认光标 */
+html, body {
   cursor: url('https://www.oovoo.zone.id/pic/pointer.ico'), auto;
 }
 
-/* 链接状态 */
-.custom-cursor .link {
-  cursor: url('https://www.oovoo.zone.id/pic/link.ico'), pointer;
+/* 链接元素光标 */
+a, [class*="link"] {
+  cursor: url('https://www.oovoo.zone.id/pic/link.ico'), pointer !important;
 }
 
 /* 进度状态 */
-.custom-cursor .progress {
-  cursor: url('https://www.oovoo.zone.id/pic/work.gif'), progress;
+.progress, [class*="progress"] {
+  cursor: url('https://www.oovoo.zone.id/pic/work.gif'), progress !important;
 }
 
 /* 忙碌状态 */
-.custom-cursor .busy {
-  cursor: url('https://www.oovoo.zone.id/pic/busy.gif'), wait;
+.busy, [class*="busy"] {
+  cursor: url('https://www.oovoo.zone.id/pic/busy.gif'), wait !important;
 }
-
