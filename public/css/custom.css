@@ -10,7 +10,7 @@
 
 /* 默认状态 */
 .custom-cursor {
-  cursor: url('https://www.oovoo.zone.id/pic/pointer.ico'), default;
+  cursor: url('https://www.oovoo.zone.id/pic/pointer.ico'), auto;
 }
 
 /* 链接状态 */
@@ -28,12 +28,3 @@
   cursor: url('https://www.oovoo.zone.id/pic/busy.gif'), wait;
 }
 
-/* 移动状态 */
-.custom-cursor .move {
-  cursor: url('https://www.oovoo.zone.id/pic/move.ico'), move;
-}
-
-/* 帮助状态 */
-.custom-cursor .help {
-  cursor: url('https://www.oovoo.zone.id/pic/help.ico'), help;
-}
