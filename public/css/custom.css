@@ -8,22 +8,3 @@
 }
 
 
-/* 全局默认光标 */
-html, body {
-  cursor: url('https://www.oovoo.zone.id/pic/pointer.ico'), auto;
-}
-
-/* 链接元素光标 */
-a, [class*="link"] {
-  cursor: url('https://www.oovoo.zone.id/pic/link.ico'), pointer !important;
-}
-
-/* 进度状态 */
-.progress, [class*="progress"] {
-  cursor: url('https://www.oovoo.zone.id/pic/work.gif'), progress !important;
-}
-
-/* 忙碌状态 */
-.busy, [class*="busy"] {
-  cursor: url('https://www.oovoo.zone.id/pic/busy.gif'), wait !important;
-}
