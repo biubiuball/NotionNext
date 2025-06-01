@@ -31,9 +31,10 @@ import SlotBar from './components/SlotBar'
 import TagItemMini from './components/TagItemMini'
 import TocDrawer from './components/TocDrawer'
 import TocDrawerButton from './components/TocDrawerButton'
-import CursorFollow from './components/CursorFollow';
 import CONFIG from './config'
 import { Style } from './style'
+import CursorFollow from '/components/CursorFollow'
+
 
 const AlgoliaSearchModal = dynamic(
   () => import('@/components/AlgoliaSearchModal'),
@@ -67,7 +68,21 @@ const LayoutBase = props => {
   const tocRef = isBrowser ? document.getElementById('article-wrapper') : null
 
   // 悬浮按钮内容
-  const floatSlot = post && <ButtonJumpToComment />
+  const floatSlot = (
+    <>
+      {post?.toc?.length > 1 && (
+        <div className='block lg:hidden'>
+          <TocDrawerButton
+            onClick={() => {
+              drawerRight?.current?.handleSwitchVisible()
+            }}
+          />
+        </div>
+      )}
+      {post && <ButtonJumpToComment />}
+      {showRandomButton && <ButtonRandomPostMini {...props} />}
+    </>
+  )
 
   // Algolia搜索框
   const searchModal = useRef(null)
@@ -79,6 +94,9 @@ const LayoutBase = props => {
         className={`${siteConfig('FONT_STYLE')} dark:bg-black scroll-smooth`}>
         <Style />
 
+        {/* 鼠标轨迹效果组件 */}
+        <CursorFollow />
+        
         {/* 顶部导航 */}
         <Header {...props} />
 
@@ -142,21 +160,13 @@ const LayoutBase = props => {
         {/* 全文搜索 */}
         <AlgoliaSearchModal cRef={searchModal} {...props} />
 
-        {/* 其他内容 */}
-        function App() {
-  return (
-    <div>
-      {/* 其他内容 */}
-      <CursorFollow />
-    </div>
-  );
-}
         {/* 页脚 */}
         <Footer title={siteConfig('TITLE')} />
       </div>
     </ThemeGlobalHexo.Provider>
   )
 }
+
 
 /**
  * 首页
