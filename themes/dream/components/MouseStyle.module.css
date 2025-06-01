@@ -1,0 +1,44 @@
+/* components/MouseStyle.module.css */
+.globalCursorNone * {
+  cursor: none !important;
+}
+
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.inner {
+  fill: #F2F5F8;
+  transition: fill 0.2s ease;
+}
+
+.outer {
+  fill: #111920;
+  transition: fill 0.2s ease;
+}
+
+/* 悬停效果 */
+.cursor:hover .inner {
+  fill: #e6e9ec;
+}
+
+.cursor:hover .outer {
+  fill: #0d1218;
+}
+
+/* 点击效果 */
+.cursor:active .inner {
+  fill: #d9dde0;
+  transform: scale(0.95);
+}
+
+.cursor:active .outer {
+  fill: #090d12;
+  transform: scale(0.95);
+}
