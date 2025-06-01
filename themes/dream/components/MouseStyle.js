@@ -10,13 +10,34 @@ const MouseStyle = ({
 }) => {
   const cursorRef = useRef(null);
   const cursorInstance = useRef(null);
+  const [isMobileDevice, setIsMobileDevice] = useState(false);
   
-  // 检测是否移动设备
-  const isMobile = () => {
-    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+  // 更可靠的移动端检测（考虑触控支持和屏幕尺寸）
+  const checkIsMobile = () => {
+    // 优先检测触控支持
+    const hasTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    
+    // 结合用户代理和屏幕尺寸
+    const isSmallScreen = window.matchMedia('(max-width: 768px)').matches;
+    const isMobileUA = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
       navigator.userAgent
     );
+    
+    return hasTouch && (isMobileUA || isSmallScreen);
   };
+
+  useEffect(() => {
+    // 在客户端执行检测
+    setIsMobileDevice(checkIsMobile());
+    
+    // 如果设置为在移动设备上隐藏并且当前是移动设备，则不初始化
+    if (hideOnMobile && isMobileDevice) return;
+  }, [size, rotationSpeed, hideOnHover, hideOnMobile, isMobileDevice]);
+  
+    // 在移动设备上隐藏整个组件
+  if (hideOnMobile && isMobileDevice) {
+    return null;
+  }
 
   // ArrowPointer 类实现
   class ArrowPointer {
