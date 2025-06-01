@@ -31,6 +31,7 @@ import SlotBar from './components/SlotBar'
 import TagItemMini from './components/TagItemMini'
 import TocDrawer from './components/TocDrawer'
 import TocDrawerButton from './components/TocDrawerButton'
+import CursorFollow from './components/CursorFollow';
 import CONFIG from './config'
 import { Style } from './style'
 
@@ -140,6 +141,14 @@ const LayoutBase = props => {
 
         {/* 全文搜索 */}
         <AlgoliaSearchModal cRef={searchModal} {...props} />
+
+        {/* 其他内容 */}
+        function App() {
+        return (
+            <div> 
+        <CursorFollow />
+       </div>  );
+         }
 
         {/* 页脚 */}
         <Footer title={siteConfig('TITLE')} />
