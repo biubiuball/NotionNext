@@ -8,9 +8,9 @@ const CursorFollow = () => {
   const maxParticles = 100; // 最大粒子数量限制
   const baseSize = 4; // 基础粒子大小
   const particleConfig = {
-    life: 300, // 粒子生命周期
+    life: 500, // 粒子生命周期
     sizeVariation: 0.8, // 粒子大小变化系数
-    speedFactor: 2.5, // 粒子速度系数
+    speedFactor: 2, // 粒子速度系数
     opacityDecay: 0.02, // 透明度衰减速度
     colorPalette: [
       '#FF5252', '#FF4081', '#E040FB', '#7C4DFF',
@@ -83,11 +83,11 @@ const CursorFollow = () => {
         p.y += p.vy;
         
         // 添加重力效果
-        p.vy += 0.05;
+        p.vy += 0.03;
         
         // 生命周期衰减
         const lifeRatio = 1 - Math.min(p.age / particleConfig.life, 1);
-        p.element.style.opacity = (0.8 * lifeRatio).toFixed(2);
+        p.element.style.opacity = (0.8 * Math.sqrt(lifeRatio)).toFixed(2);
         p.element.style.transform = `translate(${p.x}px, ${p.y}px) scale(${0.5 + lifeRatio * 0.5})`;
         
         // 移除过期粒子
