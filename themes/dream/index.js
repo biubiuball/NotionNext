@@ -104,6 +104,7 @@ const LayoutBase = props => {
           rotationSpeed={0.3}
           hideOnHover={['button', 'a', '.clickable']}
           hideOnMobile={true}
+         />
         
         {/* 顶部导航 */}
         <Header {...props} />
