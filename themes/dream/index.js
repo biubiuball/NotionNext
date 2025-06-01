@@ -144,12 +144,13 @@ const LayoutBase = props => {
 
         {/* 其他内容 */}
         function App() {
-        return (
-            <div> 
-        <CursorFollow />
-       </div>  );
-         }
-
+  return (
+    <div>
+      {/* 其他内容 */}
+      <CursorFollow />
+    </div>
+  );
+}
         {/* 页脚 */}
         <Footer title={siteConfig('TITLE')} />
       </div>
