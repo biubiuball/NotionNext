@@ -1,124 +1,89 @@
 
+    /* 实现鼠标跟随粒子动画 */
 
-/* Vue鼠标轨迹粒子组件实现 */
+import React, { useState, useEffect, useRef } from 'react';
 
-
-export default {
-  name: 'CursorFollow',
-  props: {
-    particleSize: {
-      type: Number,
-      default: 4
-    },
-    particleLife: {
-      type: Number,
-      default: 300
-    },
-    particleSpeed: {
-      type: Number,
-      default: 1
-    }
-  },
-  data() {
-    return {
-      particles: [] // 存储粒子数据
-    };
-  },
-  mounted() {
-    // 添加鼠标移动事件监听器
-    window.addEventListener('mousemove', this.createParticle);
+const CursorFollow = () => {
+  const containerRef = useRef(null);
+  const particlesRef = useRef([]);
+  const particleElementsRef = useRef([]);
+  const particleLife = 300;
+  
+  useEffect(() => {
+    const container = containerRef.current;
     
-    // 启动动画循环
-    this.animationId = requestAnimationFrame(this.updateParticles);
-  },
-  beforeUnmount() {
-    // 清理事件监听器和动画循环
-    window.removeEventListener('mousemove', this.createParticle);
-    cancelAnimationFrame(this.animationId);
-  },
-  watch: {
-    particleSize(newSize) {
-      // 更新现有粒子大小
-      const particles = this.$refs.container.querySelectorAll('.particle');
-      particles.forEach(particle => {
-        particle.style.width = `${newSize}px`;
-        particle.style.height = `${newSize}px`;
-      });
-    }
-  },
-  methods: {
-    createParticle(event) {
-      // 创建新粒子
-      const particle = document.createElement('div');
-      particle.className = 'particle';
+    const handleMouseMove = (e) => {
+      const span = document.createElement('span');
+      span.style.cssText = `
+        position: absolute;
+        left: -5px;
+        top: -5px;
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+      `;
       
-      // 设置粒子样式
-      particle.style.width = `${this.particleSize}px`;
-      particle.style.height = `${this.particleSize}px`;
-      particle.style.background = `rgba(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255}, ${Math.random()})`;
+      container.appendChild(span);
       
-      // 将粒子添加到容器
-      this.$refs.container.appendChild(particle);
-      
-      // 存储粒子数据
-      this.particles.push({
-        element: particle,
+      particlesRef.current.push({
+        element: span,
         age: 0,
-        vx: (Math.random() - 0.5) * 0.5 * this.particleSpeed,
-        vy: (Math.random() - 0.5) * 0.75 * this.particleSpeed,
-        x: event.clientX,
-        y: event.clientY
+        color: `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.random()})`,
+        vx: Math.random() * 0.5,
+        vy: Math.random() * 0.75,
+        x: e.clientX,
+        y: e.clientY
       });
-    },
-    updateParticles() {
-      // 更新所有粒子
-      for (let i = this.particles.length - 1; i >= 0; i--) {
-        const p = this.particles[i];
-        
-        // 增加粒子年龄
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    
+    const animationInterval = setInterval(() => {
+      const particles = particlesRef.current;
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i];
         p.age++;
-        
-        // 更新粒子位置
         p.x += p.vx * 2;
         p.y += p.vy * 2;
         
-        // 应用新位置
-        p.element.style.left = `${p.x}px`;
-        p.element.style.top = `${p.y}px`;
+        p.element.style.background = p.color;
+        p.element.style.transform = `translate(${p.x}px, ${p.y}px)`;
         
-        // 根据年龄设置透明度
-        const opacity = 1 - (p.age / this.particleLife);
-        p.element.style.opacity = opacity;
-        
-        // 如果粒子生命周期结束，移除它
-        if (p.age >= this.particleLife) {
-          p.element.remove();
-          this.particles.splice(i, 1);
+        if (p.age >= particleLife) {
+          container.removeChild(p.element);
+          particles.splice(i, 1);
         }
       }
-      
-      // 继续动画循环
-      this.animationId = requestAnimationFrame(this.updateParticles);
-    }
-  }
+    }, 16); // ~60fps
+    
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      clearInterval(animationInterval);
+      // 清除所有粒子元素
+      particlesRef.current.forEach(p => {
+        if (p.element.parentNode === container) {
+          container.removeChild(p.element);
+        }
+      });
+      particlesRef.current = [];
+    };
+  }, []);
+
+  return (
+    <div 
+      ref={containerRef}
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100vw',
+        height: '100vh',
+        pointerEvents: 'none',
+        overflow: 'hidden',
+        zIndex: 9999
+      }}
+    />
+  );
 };
-</script>
 
-<style scoped>
-.cursor-follow-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 9999;
-}
-
-.particle {
-  position: absolute;
-  border-radius: 50%;
-  pointer-events: none;
-}
-</style>
-
+export default CursorFollow;
