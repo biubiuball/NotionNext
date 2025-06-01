@@ -5,12 +5,12 @@ const CursorFollow = () => {
   const particlesRef = useRef([]);
   const lastTimeRef = useRef(0);
   const particleInterval = 16; // 粒子生成间隔(ms)，控制粒子密度
-  const maxParticles = 100; // 最大粒子数量限制
+  const maxParticles = 120; // 最大粒子数量限制
   const baseSize = 4; // 基础粒子大小
   const particleConfig = {
     life: 500, // 粒子生命周期
     sizeVariation: 0.8, // 粒子大小变化系数
-    speedFactor: 2, // 粒子速度系数
+    speedFactor: 1.8, // 粒子速度系数
     opacityDecay: 0.02, // 透明度衰减速度
     colorPalette: [
       '#FF5252', '#FF4081', '#E040FB', '#7C4DFF',
