@@ -34,6 +34,7 @@ import TocDrawerButton from './components/TocDrawerButton'
 import CONFIG from './config'
 import { Style } from './style'
 import CursorFollow from './components/CursorFollow'
+import MouseStyle from '/components/MouseStyle';
 
 
 const AlgoliaSearchModal = dynamic(
@@ -96,6 +97,13 @@ const LayoutBase = props => {
 
         {/* 鼠标轨迹效果组件 */}
         <CursorFollow />
+
+        {/* 鼠标轨迹效果组件 - 添加在这里 */}
+        <MouseStyle
+          size={24}
+          rotationSpeed={0.3}
+          hideOnHover={['button', 'a', '.clickable']}
+          hideOnMobile={true}
         
         {/* 顶部导航 */}
         <Header {...props} />
