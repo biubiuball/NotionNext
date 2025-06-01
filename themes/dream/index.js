@@ -33,7 +33,7 @@ import TocDrawer from './components/TocDrawer'
 import TocDrawerButton from './components/TocDrawerButton'
 import CONFIG from './config'
 import { Style } from './style'
-import CursorFollow from '/components/CursorFollow'
+import CursorFollow from './components/CursorFollow'
 
 
 const AlgoliaSearchModal = dynamic(
