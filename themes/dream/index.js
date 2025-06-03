@@ -34,6 +34,7 @@ import TocDrawerButton from './components/TocDrawerButton'
 import CONFIG from './config'
 import { Style } from './style'
 import CursorFollow from './components/CursorFollow'
+import Snowflake from './components/Snowflake'
 
 
 const AlgoliaSearchModal = dynamic(
@@ -93,6 +94,9 @@ const LayoutBase = props => {
         id='theme-hexo'
         className={`${siteConfig('FONT_STYLE')} dark:bg-black scroll-smooth`}>
         <Style />
+
+        {/* 雪花背景组件 */}
+        <Snowflake />
 
         {/* 鼠标轨迹效果组件 */}
         <CursorFollow />
