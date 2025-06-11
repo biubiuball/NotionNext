@@ -8,10 +8,12 @@ const Style = () => {
   return (<style jsx global>{`
     // 底色
     body{
-        background-color: #FAFAFA
+        background: #EEAECA;
+        background: linear-gradient(0deg, rgba(238, 174, 202, 1) 0%, rgba(255, 255, 255, 1) 35%, rgba(255, 255, 255, 1) 65%, rgba(238, 174, 202, 1) 100%);
     }
     .dark body{
-        background-color: #121212
+        background: #121212;
+        background: linear-gradient(0deg, rgba(18, 18, 18, 1) 0%, rgba(14, 97, 240, 1) 35%, rgba(14, 97, 240, 1) 65%, rgba(18, 18, 18, 1) 100%);
     }
   
     /*  菜单下划线动画 */
