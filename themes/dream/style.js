@@ -8,10 +8,10 @@ const Style = () => {
   return (<style jsx global>{`
     // 底色
     body{
-        background-image: url('https://www.oovoo.zone.id/jpg/light.jpg');
+        background-color: #f5f5f5
     }
     .dark body{
-        background-image: url('https://www.oovoo.zone.id/jpg/night.jpg');
+        background-color: black;
     }
   
     /*  菜单下划线动画 */
