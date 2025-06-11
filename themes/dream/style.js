@@ -8,12 +8,10 @@ const Style = () => {
   return (<style jsx global>{`
     // 底色
     body{
-        background: #EEAECA;
-        background: linear-gradient(0deg, rgba(238, 174, 202, 1) 0%, rgba(255, 255, 255, 1) 35%, rgba(255, 255, 255, 1) 65%, rgba(238, 174, 202, 1) 100%);
+        background-image: url('https://www.oovoo.zone.id/jpg/light.jpg');
     }
     .dark body{
-        background: #121212;
-        background: linear-gradient(0deg, rgba(18, 18, 18, 1) 0%, rgba(14, 97, 240, 1) 35%, rgba(14, 97, 240, 1) 65%, rgba(18, 18, 18, 1) 100%);
+        background-image: url('https://www.oovoo.zone.id/jpg/night.jpg');
     }
   
     /*  菜单下划线动画 */
@@ -60,12 +58,10 @@ const Style = () => {
 
     ::-webkit-scrollbar-track {
         background: transparent;
-        border-radius:10px;
     }
 
     ::-webkit-scrollbar-thumb {
         background-color: #4338ca;
-        border-radius:10px;
     }
 
     * {
