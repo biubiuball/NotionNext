@@ -62,27 +62,21 @@ const Header = props => {
       const scrollInHeader =
         header && (scrollS < 10 || scrollS < header?.clientHeight - 50) // 透明导航条的条件
 
-      // const textWhite = header && scrollInHeader
-
       if (scrollInHeader) {
         nav && nav.classList.replace('bg-white', 'bg-none')
         nav && nav.classList.replace('border', 'border-transparent')
         nav && nav.classList.replace('drop-shadow-md', 'shadow-none')
         nav && nav.classList.replace('dark:bg-hexo-black-gray', 'transparent')
+        nav && nav.classList.replace('text-black', 'text-white')
       } else {
         nav && nav.classList.replace('bg-none', 'bg-white')
         nav && nav.classList.replace('border-transparent', 'border')
         nav && nav.classList.replace('shadow-none', 'drop-shadow-md')
         nav && nav.classList.replace('transparent', 'dark:bg-hexo-black-gray')
-      }
-
-      if (scrollInHeader) {
-        nav && nav.classList.replace('text-black', 'text-white')
-      } else {
         nav && nav.classList.replace('text-white', 'text-black')
       }
 
-      // 导航栏不在头图里，且页面向下滚动一定程度 隐藏导航栏
+      // 滚动后添加玻璃拟态效果
       const showNav =
         scrollS <= windowTop ||
         scrollS < 5 ||
@@ -146,11 +140,11 @@ const Header = props => {
     <div id='top-nav' className='z-40'>
       <SearchDrawer cRef={searchDrawer} slot={searchDrawerSlot} />
 
-      {/* 导航栏 */}
+      {/* 导航栏 - 添加玻璃拟态效果 */}
       <div
         id='sticky-nav'
         className={
-          'top-0 duration-300 transition-all fixed bg-transparent dark:text-gray-200 text-black w-full z-20 transform border-transparent dark:border-transparent'
+          'top-0 duration-300 transition-all fixed bg-transparent dark:text-gray-200 text-white w-full z-20 transform border-transparent dark:border-transparent'
         }>
         <div className='w-full flex justify-between items-center px-4 py-2'>
           <div className='flex'>
