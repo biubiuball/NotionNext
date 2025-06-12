@@ -63,30 +63,6 @@
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
-/* 导航栏样式 */
-#sticky-nav {
-    backdrop-filter: blur(8px);
-    background: rgba(255, 255, 255, 0.75) !important;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.dark #sticky-nav {
-    background: rgba(10, 10, 10, 0.75) !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-/* 滚动时的导航栏样式 */
-#sticky-nav.scrolled {
-    background: rgba(255, 255, 255, 0.9) !important;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-}
-
-.dark #sticky-nav.scrolled {
-    background: rgba(10, 10, 10, 0.9) !important;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-}
-
 /* Hero区域样式 */
 #header {
     position: relative;
@@ -111,22 +87,6 @@
 
 .glassmorphism:hover {
     background: rgba(255, 255, 255, 0.25);
-}
-
-/* 动画效果 */
-@keyframes bounce {
-    0%, 100% {
-        transform: translateY(-25%);
-        animation-timing-function: cubic-bezier(0.8,0,1,1);
-    }
-    50% {
-        transform: translateY(0);
-        animation-timing-function: cubic-bezier(0,0,0.2,1);
-    }
-}
-
-.bounce {
-    animation: bounce 1s infinite;
 }
 
 @keyframes fadeInUp {
