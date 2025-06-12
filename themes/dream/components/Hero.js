@@ -71,10 +71,10 @@ const Hero = props => {
           className='glassmorphism mt-12 border cursor-pointer w-40 text-center pt-4 pb-3 text-md text-white hover:bg-[#4338ca] duration-300 rounded-3xl z-40'>
            <style jsx>{`
           @keyframes bounce {
-            0%,100% { transform: translateY(-25%); animation-timing-function: cubic-bezier(0.8,0,1,1); }
-            50% { transform: translateY(0); animation-timing-function: cubic-bezier(0,0,0.2,1); }
+            0%,100% { transform: translateY(0%); animation-timing-function: cubic-bezier(0.8,0,1,1); }
+            50% { transform: translateY(-25%); animation-timing-function: cubic-bezier(0,0,0.2,1); }
           }
-          .bounce { animation: bounce 3s infinite; }
+          .bounce { animation: bounce 2s infinite; }
   `       }</style>
           <i className='fas fa-angle-double-down bounce' />
           <span>
