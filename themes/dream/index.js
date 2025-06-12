@@ -167,7 +167,8 @@ const LayoutBase = props => {
         <AlgoliaSearchModal cRef={searchModal} {...props} />
 
         {/* 页脚 */}
-        <Footer title={siteConfig('TITLE')} />
+        <div className={`w-full ${fullWidth ? '' : 'max-w-4xl mx-auto'}`}>
+         <Footer title={siteConfig('TITLE')} />
       </div>
     </ThemeGlobalHexo.Provider>
   )
