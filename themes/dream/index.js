@@ -96,6 +96,12 @@ const LayoutBase = props => {
 
         {/* 鼠标轨迹效果组件 */}
         <CursorFollow />
+
+        {/* 背景图片层 - 浅色模式 */}
+        <div className="light-bg"></div>
+        
+        {/* 背景图片层 - 深色模式 */}
+        <div className="dark-bg"></div>
         
         {/* 顶部导航 */}
         <Header {...props} />
@@ -117,7 +123,7 @@ const LayoutBase = props => {
         {/* 主区块 */}
         <main
           id='wrapper'
-          className={`${siteConfig('HEXO_HOME_BANNER_ENABLE', null, CONFIG) ? '' : 'pt-16'} bg-hexo-background-gray dark:bg-black w-full py-8 md:px-8 lg:px-24 min-h-screen relative`}>
+          className={`${siteConfig('HEXO_HOME_BANNER_ENABLE', null, CONFIG) ? '' : 'pt-16'} bg-transparent w-full py-8 md:px-8 lg:px-24 min-h-screen relative`}>
           <div
             id='container-inner'
             className={
@@ -127,7 +133,7 @@ const LayoutBase = props => {
               ' w-full mx-auto lg:flex lg:space-x-4 justify-center relative z-10'
             }>
             <div
-              className={`${className || ''} w-full ${fullWidth ? '' : 'max-w-4xl'} h-full overflow-hidden`}>
+              className={`${className || ''} w-full ${fullWidth ? '' : 'max-w-4xl'} h-full overflow-hidden content-overlay rounded-xl p-6 shadow-xl`}>
               <Transition
                 show={!onLoading}
                 appear={true}
