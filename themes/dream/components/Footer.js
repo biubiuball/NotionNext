@@ -13,7 +13,7 @@ const Footer = ({ title }) => {
 
   return (
     <footer className='relative z-10 flex-shrink-0 justify-center text-center m-auto w-full leading-6 text-gray-600 dark:text-gray-100 text-sm p-6'>
-      <div className='content-overlay rounded-xl p-6 shadow-xl'>
+      <div className='content-overlay rounded-xl p-6 shadow-xl w-full mx-auto'>
         <SocialButton />
         <div className='flex justify-center'>
           <div>
