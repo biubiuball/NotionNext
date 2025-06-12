@@ -87,29 +87,6 @@
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
-/* 页脚样式 */
-footer {
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-}
-
-footer .content-overlay {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-/* 悬浮按钮样式 */
-.float-button {
-    background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-}
-
-.dark .float-button {
-    background: rgba(30, 30, 30, 0.9);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-}
-
 /* 动画效果 */
 @keyframes fadeInUp {
     from {
