@@ -123,7 +123,7 @@ const LayoutBase = props => {
         {/* 主区块 */}
         <main
           id='wrapper'
-          className={`${siteConfig('HEXO_HOME_BANNER_ENABLE', null, CONFIG) ? '' : 'pt-16'} bg-transparent w-full py-8 md:px-8 lg:px-24 min-h-screen relative`}>
+          className={`${siteConfig('HEXO_HOME_BANNER_ENABLE', null, CONFIG) ? '' : 'pt-16'} bg-hexo-background-gray dark:bg-black w-full py-8 md:px-8 lg:px-24 min-h-screen relative`}>
           <div
             id='container-inner'
             className={
@@ -132,36 +132,30 @@ const LayoutBase = props => {
                 : '') +
               ' w-full mx-auto lg:flex lg:space-x-4 justify-center relative z-10'
             }>
-            {/* 主内容区 */}
-            <div className="flex-1">
-              <div
-                className={`${className || ''} w-full ${fullWidth ? '' : 'max-w-4xl'} h-full overflow-hidden content-overlay rounded-xl p-6 shadow-xl`}>
-                <Transition
-                  show={!onLoading}
-                  appear={true}
-                  enter='transition ease-in-out duration-700 transform order-first'
-                  enterFrom='opacity-0 translate-y-16'
-                  enterTo='opacity-100'
-                  leave='transition ease-in-out duration-300 transform'
-                  leaveFrom='opacity-100 translate-y-0'
-                  leaveTo='opacity-0 -translate-y-16'
-                  unmount={false}>
-                  {/* 主区上部嵌入 */}
-                  {slotTop}
+            <div
+              className={`${className || ''} w-full ${fullWidth ? '' : 'max-w-4xl'} h-full overflow-hidden`}>
+              <Transition
+                show={!onLoading}
+                appear={true}
+                enter='transition ease-in-out duration-700 transform order-first'
+                enterFrom='opacity-0 translate-y-16'
+                enterTo='opacity-100'
+                leave='transition ease-in-out duration-300 transform'
+                leaveFrom='opacity-100 translate-y-0'
+                leaveTo='opacity-0 -translate-y-16'
+                unmount={false}>
+                {/* 主区上部嵌入 */}
+                {slotTop}
 
-                  {children}
-                </Transition>
-              </div>
+                {children}
+              </Transition>
             </div>
-
 
             {/* 右侧栏 */}
-            <div className="lg:min-h-[calc(100vh-9rem)] flex items-start">
-              <SideRight {...props} />
-            </div>
+            <SideRight {...props} />
           </div>
         </main>
-
+              
         <div className='block lg:hidden'>
           <TocDrawer post={post} cRef={drawerRight} targetRef={tocRef} />
         </div>
