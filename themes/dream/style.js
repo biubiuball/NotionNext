@@ -47,7 +47,7 @@ const Style = () => {
 
     // 选中字体颜色
     ::selection {
-        background: #4338ca;
+        background: color-mix(in srgb, var(--theme-color) 30%, transparent);
     }
 
     // 自定义滚动条
