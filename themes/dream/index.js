@@ -132,27 +132,33 @@ const LayoutBase = props => {
                 : '') +
               ' w-full mx-auto lg:flex lg:space-x-4 justify-center relative z-10'
             }>
-            <div
-              className={`${className || ''} w-full ${fullWidth ? '' : 'max-w-4xl'} h-full overflow-hidden content-overlay rounded-xl p-6 shadow-xl`}>
-              <Transition
-                show={!onLoading}
-                appear={true}
-                enter='transition ease-in-out duration-700 transform order-first'
-                enterFrom='opacity-0 translate-y-16'
-                enterTo='opacity-100'
-                leave='transition ease-in-out duration-300 transform'
-                leaveFrom='opacity-100 translate-y-0'
-                leaveTo='opacity-0 -translate-y-16'
-                unmount={false}>
-                {/* 主区上部嵌入 */}
-                {slotTop}
+            {/* 主内容区 */}
+            <div className="flex-1">
+              <div
+                className={`${className || ''} w-full ${fullWidth ? '' : 'max-w-4xl'} h-full overflow-hidden content-overlay rounded-xl p-6 shadow-xl`}>
+                <Transition
+                  show={!onLoading}
+                  appear={true}
+                  enter='transition ease-in-out duration-700 transform order-first'
+                  enterFrom='opacity-0 translate-y-16'
+                  enterTo='opacity-100'
+                  leave='transition ease-in-out duration-300 transform'
+                  leaveFrom='opacity-100 translate-y-0'
+                  leaveTo='opacity-0 -translate-y-16'
+                  unmount={false}>
+                  {/* 主区上部嵌入 */}
+                  {slotTop}
 
-                {children}
-              </Transition>
+                  {children}
+                </Transition>
+              </div>
             </div>
 
+
             {/* 右侧栏 */}
-            <SideRight {...props} />
+            <div className="lg:min-h-[calc(100vh-9rem)] flex items-start">
+              <SideRight {...props} />
+            </div>
           </div>
         </main>
 
