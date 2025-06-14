@@ -69,7 +69,7 @@ const Hero = props => {
           onClick={() => {
             window.scrollTo({ top: wrapperTop, behavior: 'smooth' })
           }}
-          className='glassmorphism mt-12 border cursor-pointer w-40 text-center pt-4 pb-3 text-md text-white hover:bg-[#928cee] duration-300 rounded-3xl z-40'>
+          className='glassmorphism mt-12 border cursor-pointer w-40 text-center pt-4 pb-3 text-md text-white hover:bg-[#4338ca] duration-300 rounded-3xl z-40'>
          <style jsx>{`
 @keyframes my-bounce {
   0%, 100% {
