@@ -25,16 +25,35 @@
 }
 
 .dark-bg {
-  background: #000 !important; /* 用纯色代替图片 */
-  opacity: 1 !important;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('https://cdn.jsdelivr.net/gh/biubiuball/BlogImage/jpg/nighttown.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  filter: blur(10px) brightness(0.8); /* 增加暗化效果 */
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.5s ease;
 }
 
-.dark .light-bg {
-    opacity: 0;
+:root .dark-bg {
+  opacity: 0;
 }
 
 .dark .dark-bg {
-    opacity: 0.85;
+  opacity: 0.85;
+}
+
+:root .light-bg {
+  opacity: 0.85;
+}
+
+.dark .light-bg {
+  opacity: 0;
 }
 
 /* 内容区域遮罩 */
