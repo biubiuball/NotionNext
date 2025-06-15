@@ -66,7 +66,22 @@ const LayoutBase = props => {
   ) : null
 
   const drawerRight = useRef(null)
-  const tocRef = isBrowser ? document.getElementById('article-wrapper') : null
+  const tocRef = isBrowser ? document.getElementById('article-wrapper') : null  
+
+  // 添加背景图片初始化逻辑
+  useEffect(() => {
+    if (isBrowser) {
+      // 确保背景元素存在
+      const lightBg = document.querySelector('.light-bg')
+      const darkBg = document.querySelector('.dark-bg')
+      
+      // 设置初始层级
+      if (lightBg && darkBg) {
+        lightBg.style.zIndex = '-2'
+        darkBg.style.zIndex = '-1'
+      }
+    }
+  }, [])
 
   // 悬浮按钮内容
   const floatSlot = (
@@ -97,11 +112,16 @@ const LayoutBase = props => {
         {/* 鼠标轨迹效果组件 */}
         <CursorFollow />
 
-        {/* 背景图片层 - 浅色模式 */}
-        <div className="light-bg"></div>
+        {/* 修改背景图片层 - 添加样式 */}
+        <div 
+          className="light-bg fixed inset-0 bg-cover bg-center z-[-2]"
+          style={{ backgroundImage: "url('https://cdn.jsdelivr.net/gh/biubiuball/BlogImage/jpg/lightspot.jpeg')" }}
+        />
         
-        {/* 背景图片层 - 深色模式 */}
-        <div className="dark-bg"></div>
+        <div 
+          className="dark-bg fixed inset-0 bg-cover bg-center z-[-3]"
+          style={{ backgroundImage: "url('https://cdn.jsdelivr.net/gh/biubiuball/BlogImage/jpg/nightcity.jpg')" }}
+        />
         
         {/* 顶部导航 */}
         <Header {...props} />
