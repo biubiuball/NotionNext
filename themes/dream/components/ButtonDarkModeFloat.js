@@ -50,7 +50,7 @@ export default function ButtonDarkModeFloat() {
       }>
       <i
         id='darkModeButton'
-        className={`${isDarkMode ? 'fa-sun' : 'fa-moon'} fas text-xs`}
+        className={`${isDarkMode ? 'fa-sun' : 'fa-moon'} fas text-white bg-indigo-700  w-10 h-10  py-2.5 rounded-full dark:bg-black cursor-pointer`}
       />
     </div>
   )
