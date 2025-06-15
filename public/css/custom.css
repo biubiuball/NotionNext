@@ -23,6 +23,7 @@
 
 .light-bg {
   background-image: url('https://cdn.jsdelivr.net/gh/biubiuball/BlogImage/jpg/lightspot.jpeg');
+  background-color: #f0f0f0; /* Fallback color */
   filter: blur(8px);
   opacity: 0.85;
   z-index: -1;
@@ -30,6 +31,7 @@
 
 .dark-bg {
   background-image: url('https://cdn.jsdelivr.net/gh/biubiuball/BlogImage/jpg/nightcity.jpg');
+  background-color: #1a1a1a; /* Fallback color */
   opacity: 0;
   z-index: -2;
 }
@@ -42,6 +44,14 @@
 .dark .dark-bg {
   opacity: 0.85;
   z-index: -1;
+}
+
+/* 响应式背景调整 */
+@media (max-width: 768px) {
+  .light-bg, .dark-bg {
+    background-size: contain;
+    filter: blur(4px); /* Reduce blur for smaller screens */
+  }
 }
 
 /* 内容区域遮罩 */
