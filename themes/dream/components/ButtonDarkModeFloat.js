@@ -1,7 +1,7 @@
 import { siteConfig } from '@/lib/config'
 import { useGlobal } from '@/lib/global'
 import { saveDarkModeToLocalStorage } from '@/themes/theme'
-import CONFIG from '../config'
+import CONFIG from './config'
 import { useEffect } from 'react'
 
 /**
