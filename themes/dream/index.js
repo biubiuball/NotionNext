@@ -68,21 +68,6 @@ const LayoutBase = props => {
   const drawerRight = useRef(null)
   const tocRef = isBrowser ? document.getElementById('article-wrapper') : null  
 
-  // 添加背景图片初始化逻辑
-  useEffect(() => {
-    if (isBrowser) {
-      // 确保背景元素存在
-      const lightBg = document.querySelector('.light-bg')
-      const darkBg = document.querySelector('.dark-bg')
-      
-      // 设置初始层级
-      if (lightBg && darkBg) {
-        lightBg.style.zIndex = '-2'
-        darkBg.style.zIndex = '-1'
-      }
-    }
-  }, [])
-
   // 悬浮按钮内容
   const floatSlot = (
     <>
@@ -101,6 +86,21 @@ const LayoutBase = props => {
 
   // Algolia搜索框
   const searchModal = useRef(null)
+   // 添加背景图片初始化逻辑 - 只在客户端执行
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const lightBg = document.querySelector('.light-bg')
+      const darkBg = document.querySelector('.dark-bg')
+      
+      // 检查主题模式并设置初始层级
+      const isDark = document.documentElement.classList.contains('dark')
+      
+      if (lightBg && darkBg) {
+        lightBg.style.zIndex = isDark ? '-2' : '-1'
+        darkBg.style.zIndex = isDark ? '-1' : '-2'
+      }
+    }
+  }, [])
 
   return (
     <ThemeGlobalHexo.Provider value={{ searchModal }}>
