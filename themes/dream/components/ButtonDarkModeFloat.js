@@ -2,7 +2,7 @@ import { siteConfig } from '@/lib/config'
 import { useGlobal } from '@/lib/global'
 import { saveDarkModeToLocalStorage } from '@/themes/theme'
 import CONFIG from '../config'
-import { useEffect } from 'react' // 
+import { useEffect } from 'react'
 
 /**
  * 深色模式按钮
@@ -20,7 +20,6 @@ export default function ButtonDarkModeFloat() {
       darkImg.src = 'https://cdn.jsdelivr.net/gh/biubiuball/BlogImage/jpg/nightcity.jpg'
     }
     
-    // 确保只在客户端执行
     if (typeof window !== 'undefined') {
       preloadImages()
     }
@@ -36,17 +35,32 @@ export default function ButtonDarkModeFloat() {
     updateDarkMode(newStatus)
     
     const htmlElement = document.documentElement
-    // 添加临时类阻止过渡效果
-    htmlElement.classList.add('no-transition')
     
-    htmlElement.classList?.remove(newStatus ? 'light' : 'dark')
-    htmlElement.classList?.add(newStatus ? 'dark' : 'light')
-
-    // 强制重绘
-    void htmlElement.offsetHeight
+    // 确保只有一个背景层处于活动状态
+    const lightBg = document.querySelector('.light-bg')
+    const darkBg = document.querySelector('.dark-bg')
     
-    // 移除临时类恢复过渡
-    htmlElement.classList.remove('no-transition')
+    if (newStatus) {
+      // 切换到深色模式
+      htmlElement.classList.add('dark')
+      htmlElement.classList.remove('light')
+      
+      // 确保深色背景在浅色背景之上
+      if (lightBg && darkBg) {
+        lightBg.style.zIndex = '-1';
+        darkBg.style.zIndex = '-1';
+      }
+    } else {
+      // 切换到浅色模式
+      htmlElement.classList.add('light')
+      htmlElement.classList.remove('dark')
+      
+      // 确保浅色背景在深色背景之上
+      if (lightBg && darkBg) {
+        lightBg.style.zIndex = '-1';
+        darkBg.style.zIndex = '-2';
+      }
+    }
   }
 
   return (
