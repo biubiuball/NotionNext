@@ -53,7 +53,7 @@ export const useHexoGlobal = () => useContext(ThemeGlobalHexo)
  */
 const LayoutBase = props => {
   const { post, children, slotTop, className } = props
-  const { onLoading, fullWidth } = useGlobal()
+  const { onLoading, fullWidth, isDarkMode } = useGlobal()
   const router = useRouter()
   const showRandomButton = siteConfig('HEXO_MENU_RANDOM', false, CONFIG)
 
