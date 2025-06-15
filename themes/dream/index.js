@@ -36,7 +36,6 @@ import { Style } from './style'
 import CursorFollow from './components/CursorFollow'
 
 
-
 const AlgoliaSearchModal = dynamic(
   () => import('@/components/AlgoliaSearchModal'),
   { ssr: false }
@@ -96,12 +95,6 @@ const LayoutBase = props => {
 
         {/* 鼠标轨迹效果组件 */}
         <CursorFollow />
-
-        {/* 背景图片层 - 浅色模式 */}
-        <div className="light-bg"></div>
-        
-        {/* 背景图片层 - 深色模式 */}
-        <div className="dark-bg"></div>
         
         {/* 顶部导航 */}
         <Header {...props} />
@@ -155,7 +148,7 @@ const LayoutBase = props => {
             <SideRight {...props} />
           </div>
         </main>
-              
+
         <div className='block lg:hidden'>
           <TocDrawer post={post} cRef={drawerRight} targetRef={tocRef} />
         </div>
