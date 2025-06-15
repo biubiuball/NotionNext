@@ -14,16 +14,33 @@ export default function ButtonDarkModeFloat() {
   }
 
   // 用户手动设置主题
-  const handleChangeDarkMode = () => {
-    const newStatus = !isDarkMode
-    saveDarkModeToLocalStorage(newStatus)
-    updateDarkMode(newStatus)
-    const htmlElement = document.documentElement
+  // 添加切换锁定防止连续点击
+const [isSwitching, setIsSwitching] = useState(false)
+
+const handleChangeDarkMode = () => {
+  if (isSwitching) return
+  
+  setIsSwitching(true)
+  const newStatus = !isDarkMode
+  
+  // 添加临时类名阻止过渡
+  document.documentElement.classList.add('no-transition')
+  
+  saveDarkModeToLocalStorage(newStatus)
+  updateDarkMode(newStatus)
+  
+  const htmlElement = document.documentElement
   if (newStatus) {
     htmlElement.classList.add('dark')
   } else {
     htmlElement.classList.remove('dark')
   }
+  
+  // 恢复过渡效果
+  setTimeout(() => {
+    document.documentElement.classList.remove('no-transition')
+    setIsSwitching(false)
+  }, 500) // 与CSS过渡时间匹配
 }
 
    return (
