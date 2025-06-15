@@ -48,7 +48,7 @@ export default function ButtonDarkModeFloat() {
       lightBg.style.zIndex = isDarkMode ? '-2' : '-1'
       darkBg.style.zIndex = isDarkMode ? '-1' : '-2'
     }
-  }, [isDarkMode])
+  }
 
   if (!siteConfig('HEXO_WIDGET_DARK_MODE', null, CONFIG)) {
     return <></>
