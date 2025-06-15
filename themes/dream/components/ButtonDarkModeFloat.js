@@ -10,7 +10,7 @@ import { useEffect } from 'react'
 export default function ButtonDarkModeFloat() {
   const { isDarkMode, updateDarkMode } = useGlobal()
 
-  // 预加载背景图片并创建背景元素
+  // 预加载背景图片
   useEffect(() => {
     const preloadImages = () => {
       const lightImg = new Image()
@@ -22,6 +22,8 @@ export default function ButtonDarkModeFloat() {
     
     if (typeof window !== 'undefined') {
       preloadImages()
+    }
+  }, [])
       
       // 确保背景元素存在
       if (!document.querySelector('.light-bg')) {
