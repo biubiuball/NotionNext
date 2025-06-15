@@ -1,6 +1,6 @@
 import { siteConfig } from '@/lib/config'
 import { useGlobal } from '@/lib/global'
-import { saveDarkModeToLocalStorage } from '@/themes/theme'更多操作
+import { saveDarkModeToLocalStorage } from '@/themes/theme'
 import CONFIG from '../config'
 
 /**
