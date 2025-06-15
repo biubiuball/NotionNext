@@ -22,6 +22,7 @@
     z-index: -1;
     opacity: 0.85;
     transition: opacity 0.8s ease, filter 0.8s ease;
+    
 }
 
 .dark-bg {
@@ -34,19 +35,38 @@
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-
   z-index: -1;
   opacity: 0;
   transition: opacity 0.5s ease;
+  will-change: opacity;
+}
+
+.light-bg, .dark-bg {
+  pointer-events: none; 
+}
+
+.dark .light-bg {
+  opacity: 0;
+  display: none; 
+}
+
+.light-bg {
+  opacity: 0.85;
+  display: block;
+}
+
+.dark-bg {
+  opacity: 0;
+  display: none; 
 }
 
 .dark .dark-bg {
   opacity: 0.85;
+  display: block; 
 }
 
-
-.dark .light-bg {
-  opacity: 0;
+.no-transition * {
+  transition: none !important;
 }
 
 /* 内容区域遮罩 */
