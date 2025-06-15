@@ -92,6 +92,10 @@ const LayoutBase = props => {
         {/* 鼠标轨迹效果组件 */}
         <CursorFollow />
 
+        {/* 恢复背景图片容器 - 修复开始 */}
+        <div className="light-bg fixed inset-0"></div>
+        <div className="dark-bg fixed inset-0"></div>  
+
         {/* 顶部导航 */}
         <Header {...props} />
 
