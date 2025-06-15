@@ -34,7 +34,6 @@ import TocDrawerButton from './components/TocDrawerButton'
 import CONFIG from './config'
 import { Style } from './style'
 import CursorFollow from './components/CursorFollow'
-import React, { useEffect } from 'react'
 
 
 const AlgoliaSearchModal = dynamic(
