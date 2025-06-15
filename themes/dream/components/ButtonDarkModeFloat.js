@@ -12,77 +12,58 @@ export default function ButtonDarkModeFloat() {
 
   // 预加载背景图片
   useEffect(() => {
-  const preloadImages = () => {
-    const lightImg = new Image();
-    lightImg.src = 'https://cdn.jsdelivr.net/gh/biubiuball/BlogImage/jpg/lightspot.jpeg';
-    lightImg.onerror = () => console.error('Failed to preload light background image');
-
-    const darkImg = new Image();
-    darkImg.src = 'https://cdn.jsdelivr.net/gh/biubiuball/BlogImage/jpg/nightcity.jpg';
-    darkImg.onerror = () => console.error('Failed to preload dark background image');
-  };
-
-  if (typeof window !== 'undefined') {
-    preloadImages();
-  }
-}, []);
-      
-      // 确保背景元素存在
-      if (!document.querySelector('.light-bg')) {
-        const lightBg = document.createElement('div')
-        lightBg.className = 'light-bg fixed inset-0 bg-cover bg-center z-[-2]'
-        lightBg.style.backgroundImage = "url('https://cdn.jsdelivr.net/gh/biubiuball/BlogImage/jpg/lightspot.jpeg')"
-        document.body.appendChild(lightBg)
-      }
-      
-      if (!document.querySelector('.dark-bg')) {
-        const darkBg = document.createElement('div')
-        darkBg.className = 'dark-bg fixed inset-0 bg-cover bg-center z-[-3]'
-        darkBg.style.backgroundImage = "url('https://cdn.jsdelivr.net/gh/biubiuball/BlogImage/jpg/nightcity.jpg')"
-        document.body.appendChild(darkBg)
-      }
+    const preloadImages = () => {
+      const lightImg = new Image()
+      lightImg.src = 'https://cdn.jsdelivr.net/gh/biubiuball/BlogImage/jpg/lightspot.jpeg'
+      const darkImg = new Image()
+      darkImg.src = 'https://cdn.jsdelivr.net/gh/biubiuball/BlogImage/jpg/nightcity.jpg'
+    }
     
-    
-    // 初始设置背景层
+    if (typeof window !== 'undefined') {
+      preloadImages()
+    }
+  }, [])
+
+  // Handle DOM changes when isDarkMode updates
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+
+    const htmlElement = document.documentElement
     const lightBg = document.querySelector('.light-bg')
     const darkBg = document.querySelector('.dark-bg')
-    if (lightBg && darkBg) {
-      lightBg.style.zIndex = isDarkMode ? '-2' : '-1'
-      darkBg.style.zIndex = isDarkMode ? '-1' : '-2'
-     }
-  
+    
+    if (isDarkMode) {
+      // 切换到深色模式
+      htmlElement.classList.add('dark')
+      htmlElement.classList.remove('light')
+      
+      // 确保深色背景在浅色背景之上
+      if (lightBg && darkBg) {
+        lightBg.style.zIndex = '-1'
+        darkBg.style.zIndex = '-1'
+      }
+    } else {
+      // 切换到浅色模式
+      htmlElement.classList.add('light')
+      htmlElement.classList.remove('dark')
+      
+      // 确保浅色背景在深色背景之上
+      if (lightBg && darkBg) {
+        lightBg.style.zIndex = '-1'
+        darkBg.style.zIndex = '-2'
+      }
+    }
+  }, [isDarkMode])
 
   if (!siteConfig('HEXO_WIDGET_DARK_MODE', null, CONFIG)) {
     return <></>
   }
 
   const handleChangeDarkMode = () => {
-  const newStatus = !isDarkMode;
-  saveDarkModeToLocalStorage(newStatus);
-  updateDarkMode(newStatus);
-
-  const htmlElement = document.documentElement;
-  console.log('Current classes:', htmlElement.classList.toString()); // 调试类名
-
-  const lightBg = document.querySelector('.light-bg');
-  const darkBg = document.querySelector('.dark-bg');
-
-  if (newStatus) {
-    htmlElement.classList.add('dark');
-    htmlElement.classList.remove('light');
-    if (lightBg && darkBg) {
-      lightBg.style.zIndex = '-1';
-      darkBg.style.zIndex = '-1';
-    }
-  } else {
-    htmlElement.classList.add('light');
-    htmlElement.classList.remove('dark');
-    if (lightBg && darkBg) {
-      lightBg.style.zIndex = '-1';
-      darkBg.style.zIndex = '-2';
-    }
+    const newStatus = !isDarkMode
+    saveDarkModeToLocalStorage(newStatus)
+    updateDarkMode(newStatus)
   }
-};
 
   return (
     <div className={'justify-center items-center text-center'} onClick={handleChangeDarkMode}>
