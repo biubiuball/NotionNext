@@ -39,7 +39,7 @@ export default function ButtonDarkModeFloat() {
         darkBg.style.backgroundImage = "url('https://cdn.jsdelivr.net/gh/biubiuball/BlogImage/jpg/nightcity.jpg')"
         document.body.appendChild(darkBg)
       }
-    }
+    
     
     // 初始设置背景层
     const lightBg = document.querySelector('.light-bg')
@@ -47,8 +47,8 @@ export default function ButtonDarkModeFloat() {
     if (lightBg && darkBg) {
       lightBg.style.zIndex = isDarkMode ? '-2' : '-1'
       darkBg.style.zIndex = isDarkMode ? '-1' : '-2'
-    }
-  }
+     }
+  
 
   if (!siteConfig('HEXO_WIDGET_DARK_MODE', null, CONFIG)) {
     return <></>
