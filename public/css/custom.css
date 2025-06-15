@@ -7,45 +7,64 @@
     content: "\f05a";
 }
 
-/* 背景图片与虚化效果 */
-.light-bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('https://cdn.jsdelivr.net/gh/biubiuball/BlogImage/jpg/lightspot.jpeg');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    filter: blur(8px);
-    z-index: -1;
-    opacity: 0.85;
-    transition: opacity 0.8s ease, filter 0.8s ease;
+/* 添加加载完成前的占位背景 */
+.light-bg, .dark-bg {
+  background-color: #f0f2f5; /* 浅色模式默认底色 */
+  transition: opacity 0.5s ease, filter 0.5s ease;
 }
 
 .dark-bg {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url('https://cdn.jsdelivr.net/gh/biubiuball/BlogImage/jpg/nightcity.jpg');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  z-index: -1;
-  opacity: 0;
-  transition: opacity 0.5s ease;
+  background-color: #121212; /* 深色模式默认底色 */
 }
 
-.dark .dark-bg {
+/* 确保图片加载完成前不可见 */
+.light-bg {
+  opacity: 0;
+  background-image: url('https://cdn.jsdelivr.net/gh/biubiuball/BlogImage/jpg/lightspot.jpeg');
+  filter: blur(8px);
+}
+
+.dark-bg {
+  opacity: 0;
+  background-image: url('https://cdn.jsdelivr.net/gh/biubiuball/BlogImage/jpg/nightcity.jpg');
+  filter: blur(10px) brightness(0.9);
+}
+
+/* 图片加载完成后显示 */
+.light-bg.loaded {
   opacity: 0.85;
 }
 
+.dark-bg.loaded {
+  opacity: 0.85;
+}
 
-.dark .light-bg {
+/* 模式切换控制 */
+:root .light-bg.loaded {
+  opacity: 0.85;
+}
+
+:root .dark-bg.loaded {
   opacity: 0;
+}
+
+.dark .light-bg.loaded {
+  opacity: 0;
+}
+
+.dark .dark-bg.loaded {
+  opacity: 0.85;
+}
+
+/* 防止切换时的闪烁 */
+.no-transition * {
+  transition: none !important;
+}
+
+/* 优化过渡性能 */
+.light-bg, .dark-bg {
+  will-change: opacity;
+  transform: translateZ(0);
 }
 
 /* 内容区域遮罩 */
