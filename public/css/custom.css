@@ -4,54 +4,41 @@
   --bg-dark-url: url('https://cdn.jsdelivr.net/gh/biubiuball/BlogImage/jpg/nightcity.jpg');
 }
 
-#__next::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
+/* 修复背景图样式 - 开始 */
+.light-bg {
+  background-image: var(--bg-light-url);
+  background-color: #f0f0f0; /* 备用颜色 */
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
+  filter: blur(8px);
+  opacity: 0.85;
+  z-index: -1;
   transition: opacity 0.8s ease;
   pointer-events: none;
 }
 
-.light-mode-bg {
-  background-image: var(--bg-light-url);
-  background-color: #f0f0f0;
-  filter: blur(8px);
-  opacity: 0.85;
-}
-
-.dark-mode-bg {
+.dark-bg {
   background-image: var(--bg-dark-url);
-  background-color: #1a1a1a;
+  background-color: #1a1a1a; /* 备用颜色 */
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  filter: blur(8px);
   opacity: 0;
+  z-index: -2;
+  transition: opacity 0.8s ease;
+  pointer-events: none;
 }
 
-.dark .light-mode-bg {
+.dark .light-bg {
   opacity: 0;
+  z-index: -2;
 }
 
-.dark .dark-mode-bg {
+.dark .dark-bg {
   opacity: 0.85;
-}
-
-/* 深色模式切换按钮样式 */
-.dark-mode-toggle {
-  display: inline-block;
-  cursor: pointer;
-}
-
-.dark-mode-toggle i {
-  transition: transform 0.2s ease;
-}
-
-.dark-mode-toggle:hover i {
-  transform: scale(1.05);
+  z-index: -1;
 }
 
 /* 内容区域遮罩 */
