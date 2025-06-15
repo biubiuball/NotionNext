@@ -1,4 +1,4 @@
-/* 静态文件导入 自定义样式*/
+/* 静态文件导入 自定义样式*/更多操作
 
 #theme-fukasawa .sideLeft hr{
     opacity: .04;
@@ -7,64 +7,46 @@
     content: "\f05a";
 }
 
-/* 添加加载完成前的占位背景 */
-.light-bg, .dark-bg {
-  background-color: #f0f2f5; /* 浅色模式默认底色 */
-  transition: opacity 0.5s ease, filter 0.5s ease;
-}
-
-.dark-bg {
-  background-color: #121212; /* 深色模式默认底色 */
-}
-
-/* 确保图片加载完成前不可见 */
+/* 背景图片与虚化效果 */
 .light-bg {
-  opacity: 0;
-  background-image: url('https://cdn.jsdelivr.net/gh/biubiuball/BlogImage/jpg/lightspot.jpeg');
-  filter: blur(8px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://cdn.jsdelivr.net/gh/biubiuball/BlogImage/jpg/lightspot.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    filter: blur(8px);
+    z-index: -1;
+    opacity: 0.85;
+    transition: opacity 0.8s ease, filter 0.8s ease;
 }
 
 .dark-bg {
-  opacity: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background-image: url('https://cdn.jsdelivr.net/gh/biubiuball/BlogImage/jpg/nightcity.jpg');
-  filter: blur(10px) brightness(0.9);
-}
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 
-/* 图片加载完成后显示 */
-.light-bg.loaded {
-  opacity: 0.85;
-}
-
-.dark-bg.loaded {
-  opacity: 0.85;
-}
-
-/* 模式切换控制 */
-:root .light-bg.loaded {
-  opacity: 0.85;
-}
-
-:root .dark-bg.loaded {
+  z-index: -1;
   opacity: 0;
+  transition: opacity 0.5s ease;
 }
 
-.dark .light-bg.loaded {
-  opacity: 0;
-}
-
-.dark .dark-bg.loaded {
+.dark .dark-bg {
   opacity: 0.85;
 }
 
-/* 防止切换时的闪烁 */
-.no-transition * {
-  transition: none !important;
-}
 
-/* 优化过渡性能 */
-.light-bg, .dark-bg {
-  will-change: opacity;
-  transform: translateZ(0);
+.dark .light-bg {
+  opacity: 0;
 }
 
 /* 内容区域遮罩 */
@@ -72,7 +54,7 @@
     background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(5px);
     transition: all 0.3s ease-in-out;
-    border-radius: 12px;
+    border-radius: 12px;更多操作
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
