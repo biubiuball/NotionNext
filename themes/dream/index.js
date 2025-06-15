@@ -66,7 +66,7 @@ const LayoutBase = props => {
   ) : null
 
   const drawerRight = useRef(null)
-  const tocRef = isBrowser ? document.getElementById('article-wrapper') : null  
+  const tocRef = isBrowser ? document.getElementById('article-wrapper') : null
 
   // 悬浮按钮内容
   const floatSlot = (
@@ -86,21 +86,6 @@ const LayoutBase = props => {
 
   // Algolia搜索框
   const searchModal = useRef(null)
-   // 添加背景图片初始化逻辑 - 只在客户端执行
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const lightBg = document.querySelector('.light-bg')
-      const darkBg = document.querySelector('.dark-bg')
-      
-      // 检查主题模式并设置初始层级
-      const isDark = document.documentElement.classList.contains('dark')
-      
-      if (lightBg && darkBg) {
-        lightBg.style.zIndex = isDark ? '-2' : '-1'
-        darkBg.style.zIndex = isDark ? '-1' : '-2'
-      }
-    }
-  }, [])
 
   return (
     <ThemeGlobalHexo.Provider value={{ searchModal }}>
@@ -112,16 +97,11 @@ const LayoutBase = props => {
         {/* 鼠标轨迹效果组件 */}
         <CursorFollow />
 
-        {/* 修改背景图片层 - 添加样式 */}
-        <div 
-          className="light-bg fixed inset-0 bg-cover bg-center z-[-2]"
-          style={{ backgroundImage: "url('https://cdn.jsdelivr.net/gh/biubiuball/BlogImage/jpg/lightspot.jpeg')" }}
-        />
+        {/* 背景图片层 - 浅色模式 */}
+        <div className="light-bg"></div>
         
-        <div 
-          className="dark-bg fixed inset-0 bg-cover bg-center z-[-3]"
-          style={{ backgroundImage: "url('https://cdn.jsdelivr.net/gh/biubiuball/BlogImage/jpg/nightcity.jpg')" }}
-        />
+        {/* 背景图片层 - 深色模式 */}
+        <div className="dark-bg"></div>
         
         {/* 顶部导航 */}
         <Header {...props} />
