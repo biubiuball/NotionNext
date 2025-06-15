@@ -12,18 +12,20 @@ export default function ButtonDarkModeFloat() {
 
   // 预加载背景图片
   useEffect(() => {
-    const preloadImages = () => {
-      const lightImg = new Image()
-      lightImg.src = 'https://cdn.jsdelivr.net/gh/biubiuball/BlogImage/jpg/lightspot.jpeg'
-      
-      const darkImg = new Image()
-      darkImg.src = 'https://cdn.jsdelivr.net/gh/biubiuball/BlogImage/jpg/nightcity.jpg'
-    }
-    
-    if (typeof window !== 'undefined') {
-      preloadImages()
-    }
-  }, [])
+  const preloadImages = () => {
+    const lightImg = new Image();
+    lightImg.src = 'https://cdn.jsdelivr.net/gh/biubiuball/BlogImage/jpg/lightspot.jpeg';
+    lightImg.onerror = () => console.error('Failed to preload light background image');
+
+    const darkImg = new Image();
+    darkImg.src = 'https://cdn.jsdelivr.net/gh/biubiuball/BlogImage/jpg/nightcity.jpg';
+    darkImg.onerror = () => console.error('Failed to preload dark background image');
+  };
+
+  if (typeof window !== 'undefined') {
+    preloadImages();
+  }
+}, []);
       
       // 确保背景元素存在
       if (!document.querySelector('.light-bg')) {
@@ -55,25 +57,32 @@ export default function ButtonDarkModeFloat() {
   }
 
   const handleChangeDarkMode = () => {
-    const newStatus = !isDarkMode
-    saveDarkModeToLocalStorage(newStatus)
-    updateDarkMode(newStatus)
-    
-    // 只在客户端执行DOM操作
-    if (typeof window !== 'undefined') {
-      const htmlElement = document.documentElement
-      htmlElement.classList.toggle('dark', newStatus)
-      htmlElement.classList.toggle('light', !newStatus)
-      
-      // 更新背景层z-index
-      const lightBg = document.querySelector('.light-bg')
-      const darkBg = document.querySelector('.dark-bg')
-      if (lightBg && darkBg) {
-        lightBg.style.zIndex = newStatus ? '-2' : '-1'
-        darkBg.style.zIndex = newStatus ? '-1' : '-2'
-      }
+  const newStatus = !isDarkMode;
+  saveDarkModeToLocalStorage(newStatus);
+  updateDarkMode(newStatus);
+
+  const htmlElement = document.documentElement;
+  console.log('Current classes:', htmlElement.classList.toString()); // 调试类名
+
+  const lightBg = document.querySelector('.light-bg');
+  const darkBg = document.querySelector('.dark-bg');
+
+  if (newStatus) {
+    htmlElement.classList.add('dark');
+    htmlElement.classList.remove('light');
+    if (lightBg && darkBg) {
+      lightBg.style.zIndex = '-1';
+      darkBg.style.zIndex = '-1';
+    }
+  } else {
+    htmlElement.classList.add('light');
+    htmlElement.classList.remove('dark');
+    if (lightBg && darkBg) {
+      lightBg.style.zIndex = '-1';
+      darkBg.style.zIndex = '-2';
     }
   }
+};
 
   return (
     <div className={'justify-center items-center text-center'} onClick={handleChangeDarkMode}>
