@@ -31,9 +31,10 @@ import SlotBar from './components/SlotBar'
 import TagItemMini from './components/TagItemMini'
 import TocDrawer from './components/TocDrawer'
 import TocDrawerButton from './components/TocDrawerButton'
-import CONFIG from './components/config'
+import CONFIG from './config'
 import { Style } from './style'
 import CursorFollow from './components/CursorFollow'
+
 
 const AlgoliaSearchModal = dynamic(
   () => import('@/components/AlgoliaSearchModal'),
@@ -95,10 +96,6 @@ const LayoutBase = props => {
         {/* 鼠标轨迹效果组件 */}
         <CursorFollow />
         
-        {/* 背景图片容器 */}
-        <div className="light-bg"></div>
-        <div className="dark-bg"></div>
-
         {/* 顶部导航 */}
         <Header {...props} />
 
@@ -129,7 +126,7 @@ const LayoutBase = props => {
               ' w-full mx-auto lg:flex lg:space-x-4 justify-center relative z-10'
             }>
             <div
-              className={`${className || ''} w-full ${fullWidth ? '' : 'max-w-4xl'} h-full overflow-hidden content-overlay`}>
+              className={`${className || ''} w-full ${fullWidth ? '' : 'max-w-4xl'} h-full overflow-hidden`}>
               <Transition
                 show={!onLoading}
                 appear={true}
@@ -168,6 +165,7 @@ const LayoutBase = props => {
     </ThemeGlobalHexo.Provider>
   )
 }
+
 
 /**
  * 首页
@@ -291,11 +289,11 @@ const LayoutSlug = props => {
   }, [post])
   return (
     <>
-      <div className='w-full lg:hover:shadow lg:border rounded-t-xl lg:rounded-xl lg:px-2 lg:py-4 bg-white dark:bg-hexo-black-gray dark:border-black article content-overlay'>
+      <div className='w-full lg:hover:shadow lg:border rounded-t-xl lg:rounded-xl lg:px-2 lg:py-4 bg-white dark:bg-hexo-black-gray dark:border-black article'>
         {lock && <ArticleLock validPassword={validPassword} />}
 
         {!lock && post && (
-          <div className='overflow-x-auto flex-grow mx-auto md:w-full md:px-5'>
+          <div className='overflow-x-auto flex-grow mx-auto md:w-full md:px-5 '>
             <article
               id='article-wrapper'
               itemScope
@@ -353,7 +351,7 @@ const Layout404 = props => {
   })
   return (
     <>
-      <div className='text-black w-full h-screen text-center justify-center content-center items-center flex flex-col content-overlay'>
+      <div className='text-black w-full h-screen text-center justify-center content-center items-center flex flex-col'>
         <div className='dark:text-gray-200'>
           <h2 className='inline-block border-r-2 border-gray-600 mr-2 px-3 py-2 align-top'>
             404
@@ -377,7 +375,7 @@ const LayoutCategoryIndex = props => {
   const { locale } = useGlobal()
   return (
     <div className='mt-8'>
-      <Card className='w-full min-h-screen content-overlay'>
+      <Card className='w-full min-h-screen'>
         <div className='dark:text-gray-200 mb-5 mx-3'>
           <i className='mr-4 fas fa-th' /> {locale.COMMON.CATEGORY}:
         </div>
@@ -415,7 +413,7 @@ const LayoutTagIndex = props => {
   const { locale } = useGlobal()
   return (
     <div className='mt-8'>
-      <Card className='w-full content-overlay'>
+      <Card className='w-full'>
         <div className='dark:text-gray-200 mb-5 ml-4'>
           <i className='mr-4 fas fa-tag' /> {locale.COMMON.TAGS}:
         </div>
