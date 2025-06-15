@@ -6,7 +6,19 @@
  */
 const Style = () => {
   return (<style jsx global>{`
-    /* 移除背景色设置，让全局背景图正常显示 */
+    /* 确保body没有背景色 */
+    body {
+      background-color: transparent !important;
+    }
+    .dark body {
+      background-color: transparent !important;
+    }
+    
+    /* 修复z-index层级 */
+    #theme-hexo {
+      position: relative;
+      z-index: 0;
+    }
     
     /*  菜单下划线动画 */
     #theme-hexo .menu-link {
