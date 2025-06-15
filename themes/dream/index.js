@@ -117,9 +117,10 @@ const LayoutBase = props => {
         </Transition>
 
         {/* 主区块 */}
-        <main
+       <main
           id='wrapper'
           className={`${siteConfig('HEXO_HOME_BANNER_ENABLE', null, CONFIG) ? '' : 'pt-16'} bg-transparent w-full py-8 md:px-8 lg:px-24 min-h-screen relative`}>
+          {/* 容器内容 */}
           <div
             id='container-inner'
             className={
@@ -129,7 +130,7 @@ const LayoutBase = props => {
               ' w-full mx-auto lg:flex lg:space-x-4 justify-center relative z-10'
             }>
             <div
-              className={`${className || ''} w-full ${fullWidth ? '' : 'max-w-4xl'} h-full'}>
+              className={`${className || ''} w-full ${fullWidth ? '' : 'max-w-4xl'} h-full`}>
               <Transition
                 show={!onLoading}
                 appear={true}
@@ -139,18 +140,16 @@ const LayoutBase = props => {
                 leave='transition ease-in-out duration-300 transform'
                 leaveFrom='opacity-100 translate-y-0'
                 leaveTo='opacity-0 -translate-y-16'
-                unmount={false}>
-                {/* 主区上部嵌入 */}
+                /* 主区块上侧 */
+				unmount={false}>
                 {slotTop}
-
                 {children}
               </Transition>
             </div>
-
-            {/* 右侧栏 */}
+			/* 右侧栏 */
             <SideRight {...props} />
           </div>
-        </main>
+        </main>  {
 
         <div className='block lg:hidden'>
           <TocDrawer post={post} cRef={drawerRight} targetRef={tocRef} />
