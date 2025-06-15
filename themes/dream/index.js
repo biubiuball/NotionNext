@@ -35,7 +35,6 @@ import CONFIG from './config'
 import { Style } from './style'
 import CursorFollow from './components/CursorFollow'
 
-
 const AlgoliaSearchModal = dynamic(
   () => import('@/components/AlgoliaSearchModal'),
   { ssr: false }
@@ -47,13 +46,10 @@ export const useHexoGlobal = () => useContext(ThemeGlobalHexo)
 
 /**
  * 基础布局 采用左右两侧布局，移动端使用顶部导航栏
- * @param props
- * @returns {JSX.Element}
- * @constructor
  */
 const LayoutBase = props => {
   const { post, children, slotTop, className } = props
-  const { onLoading, fullWidth, isDarkMode } = useGlobal()
+  const { onLoading, fullWidth } = useGlobal()
   const router = useRouter()
   const showRandomButton = siteConfig('HEXO_MENU_RANDOM', false, CONFIG)
 
@@ -66,26 +62,6 @@ const LayoutBase = props => {
 
   const drawerRight = useRef(null)
   const tocRef = isBrowser ? document.getElementById('article-wrapper') : null
-
-  // 添加背景图片初始状态管理
-  useEffect(() => {
-    const lightBg = document.querySelector('.light-bg')
-    const darkBg = document.querySelector('.dark-bg')
-    
-    if (lightBg && darkBg) {
-      if (isDarkMode) {
-        lightBg.style.opacity = '0'
-        darkBg.style.opacity = '0.85'
-        lightBg.style.zIndex = '-2'
-        darkBg.style.zIndex = '-1'
-      } else {
-        lightBg.style.opacity = '0.85'
-        darkBg.style.opacity = '0'
-        lightBg.style.zIndex = '-1'
-        darkBg.style.zIndex = '-2'
-      }
-    }
-  }, [isDarkMode])
 
   // 悬浮按钮内容
   const floatSlot = (
@@ -116,10 +92,6 @@ const LayoutBase = props => {
         {/* 鼠标轨迹效果组件 */}
         <CursorFollow />
 
-        {/* 背景图片容器 */}
-        <div className="light-bg"></div>
-        <div className="dark-bg"></div>  
-        
         {/* 顶部导航 */}
         <Header {...props} />
 
@@ -190,12 +162,8 @@ const LayoutBase = props => {
   )
 }
 
-
 /**
  * 首页
- * 是一个博客列表，嵌入一个Hero大图
- * @param {*} props
- * @returns
  */
 const LayoutIndex = props => {
   return <LayoutPostList {...props} className='pt-8' />
@@ -203,8 +171,6 @@ const LayoutIndex = props => {
 
 /**
  * 博客列表
- * @param {*} props
- * @returns
  */
 const LayoutPostList = props => {
   return (
@@ -221,8 +187,6 @@ const LayoutPostList = props => {
 
 /**
  * 搜索
- * @param {*} props
- * @returns
  */
 const LayoutSearch = props => {
   const { keyword } = props
@@ -262,8 +226,6 @@ const LayoutSearch = props => {
 
 /**
  * 归档
- * @param {*} props
- * @returns
  */
 const LayoutArchive = props => {
   const { archivePosts } = props
@@ -286,8 +248,6 @@ const LayoutArchive = props => {
 
 /**
  * 文章详情
- * @param {*} props
- * @returns
  */
 const LayoutSlug = props => {
   const { post, lock, validPassword } = props
@@ -354,8 +314,6 @@ const LayoutSlug = props => {
 
 /**
  * 404
- * @param {*} props
- * @returns
  */
 const Layout404 = props => {
   const router = useRouter()
@@ -391,8 +349,6 @@ const Layout404 = props => {
 
 /**
  * 分类列表
- * @param {*} props
- * @returns
  */
 const LayoutCategoryIndex = props => {
   const { categoryOptions } = props
@@ -429,8 +385,6 @@ const LayoutCategoryIndex = props => {
 
 /**
  * 标签列表
- * @param {*} props
- * @returns
  */
 const LayoutTagIndex = props => {
   const { tagOptions } = props
