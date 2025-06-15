@@ -18,11 +18,13 @@ export default function ButtonDarkModeFloat() {
     const newStatus = !isDarkMode
     saveDarkModeToLocalStorage(newStatus)
     updateDarkMode(newStatus)
-    const htmlElement = document.getElementsByTagName('html')[0]
-    htmlElement.classList?.remove(newStatus ? 'light' : 'dark')
-    htmlElement.classList?.add(newStatus ? 'dark' : 'light')
+    const htmlElement = document.documentElement
+  if (newStatus) {
+    htmlElement.classList.add('dark')
+  } else {
+    htmlElement.classList.remove('dark')
   }
-
+}
 
    return (
         <div className={'justify-center items-center text-center' } onClick={handleChangeDarkMode}>
