@@ -73,7 +73,7 @@ export default function ButtonDarkModeFloat() {
         darkBg.style.zIndex = newStatus ? '-1' : '-2'
       }
     }
-  
+  }
 
   return (
     <div className={'justify-center items-center text-center'} onClick={handleChangeDarkMode}>
