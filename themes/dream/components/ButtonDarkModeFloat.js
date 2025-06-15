@@ -21,36 +21,19 @@ export default function ButtonDarkModeFloat() {
     const htmlElement = document.getElementsByTagName('html')[0]
     htmlElement.classList?.remove(newStatus ? 'light' : 'dark')
     htmlElement.classList?.add(newStatus ? 'dark' : 'light')
-    
-    // 添加背景图片切换功能
-    const lightBg = document.querySelector('.light-bg')
-    const darkBg = document.querySelector('.dark-bg')
-    
-    if (lightBg && darkBg) {
-      if (newStatus) {
-        lightBg.style.opacity = '0'
-        darkBg.style.opacity = '0.85'
-        lightBg.style.zIndex = '-2'
-        darkBg.style.zIndex = '-1'
-      } else {
-        lightBg.style.opacity = '0.85'
-        darkBg.style.opacity = '0'
-        lightBg.style.zIndex = '-1'
-        darkBg.style.zIndex = '-2'
-      }
-    }
   }
 
   return (
     <div
       onClick={handleChangeDarkMode}
-      className={
-        'justify-center items-center  text-center'
-      }>
+      className="dark-mode-toggle cursor-pointer"
+    >
       <i
         id='darkModeButton'
-        className={`${isDarkMode ? 'fa-sun' : 'fa-moon'} fas transform hover:scale-105 duration-200
-           text-white bg-indigo-700 w-10 h-10 py-2.5 rounded-full dark:bg-black cursor-pointer`}
+        className={`fas ${
+          isDarkMode ? 'fa-sun' : 'fa-moon'
+        } text-white w-10 h-10 flex items-center justify-center rounded-full transform hover:scale-105 duration-200
+         bg-indigo-700 dark:bg-black`}
       />
     </div>
   )
