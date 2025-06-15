@@ -10,7 +10,7 @@ import { useEffect } from 'react'
 export default function ButtonDarkModeFloat() {
   const { isDarkMode, updateDarkMode } = useGlobal()
 
-  // 预加载背景图片
+  // 预加载背景图片并创建背景元素
   useEffect(() => {
     const preloadImages = () => {
       const lightImg = new Image()
@@ -22,8 +22,31 @@ export default function ButtonDarkModeFloat() {
     
     if (typeof window !== 'undefined') {
       preloadImages()
+      
+      // 确保背景元素存在
+      if (!document.querySelector('.light-bg')) {
+        const lightBg = document.createElement('div')
+        lightBg.className = 'light-bg fixed inset-0 bg-cover bg-center z-[-2]'
+        lightBg.style.backgroundImage = "url('https://cdn.jsdelivr.net/gh/biubiuball/BlogImage/jpg/lightspot.jpeg')"
+        document.body.appendChild(lightBg)
+      }
+      
+      if (!document.querySelector('.dark-bg')) {
+        const darkBg = document.createElement('div')
+        darkBg.className = 'dark-bg fixed inset-0 bg-cover bg-center z-[-3]'
+        darkBg.style.backgroundImage = "url('https://cdn.jsdelivr.net/gh/biubiuball/BlogImage/jpg/nightcity.jpg')"
+        document.body.appendChild(darkBg)
+      }
     }
-  }, [])
+    
+    // 初始设置背景层
+    const lightBg = document.querySelector('.light-bg')
+    const darkBg = document.querySelector('.dark-bg')
+    if (lightBg && darkBg) {
+      lightBg.style.zIndex = isDarkMode ? '-2' : '-1'
+      darkBg.style.zIndex = isDarkMode ? '-1' : '-2'
+    }
+  }, [isDarkMode])
 
   if (!siteConfig('HEXO_WIDGET_DARK_MODE', null, CONFIG)) {
     return <></>
@@ -35,31 +58,15 @@ export default function ButtonDarkModeFloat() {
     updateDarkMode(newStatus)
     
     const htmlElement = document.documentElement
+    htmlElement.classList.toggle('dark', newStatus)
+    htmlElement.classList.toggle('light', !newStatus)
     
-    // 确保只有一个背景层处于活动状态
+    // 直接更新背景层z-index
     const lightBg = document.querySelector('.light-bg')
     const darkBg = document.querySelector('.dark-bg')
-    
-    if (newStatus) {
-      // 切换到深色模式
-      htmlElement.classList.add('dark')
-      htmlElement.classList.remove('light')
-      
-      // 确保深色背景在浅色背景之上
-      if (lightBg && darkBg) {
-        lightBg.style.zIndex = '-1';
-        darkBg.style.zIndex = '-1';
-      }
-    } else {
-      // 切换到浅色模式
-      htmlElement.classList.add('light')
-      htmlElement.classList.remove('dark')
-      
-      // 确保浅色背景在深色背景之上
-      if (lightBg && darkBg) {
-        lightBg.style.zIndex = '-1';
-        darkBg.style.zIndex = '-2';
-      }
+    if (lightBg && darkBg) {
+      lightBg.style.zIndex = newStatus ? '-2' : '-1'
+      darkBg.style.zIndex = newStatus ? '-1' : '-2'
     }
   }
 
