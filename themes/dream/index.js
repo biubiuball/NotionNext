@@ -34,6 +34,7 @@ import TocDrawerButton from './components/TocDrawerButton'
 import CONFIG from './config'
 import { Style } from './style'
 import CursorFollow from './components/CursorFollow'
+import React, { useEffect } from 'react'
 
 
 const AlgoliaSearchModal = dynamic(
@@ -66,6 +67,26 @@ const LayoutBase = props => {
 
   const drawerRight = useRef(null)
   const tocRef = isBrowser ? document.getElementById('article-wrapper') : null
+
+  // 添加背景图片初始状态管理
+  useEffect(() => {
+    const lightBg = document.querySelector('.light-bg')
+    const darkBg = document.querySelector('.dark-bg')
+    
+    if (lightBg && darkBg) {
+      if (isDarkMode) {
+        lightBg.style.opacity = '0'
+        darkBg.style.opacity = '0.85'
+        lightBg.style.zIndex = '-2'
+        darkBg.style.zIndex = '-1'
+      } else {
+        lightBg.style.opacity = '0.85'
+        darkBg.style.opacity = '0'
+        lightBg.style.zIndex = '-1'
+        darkBg.style.zIndex = '-2'
+      }
+    }
+  }, [isDarkMode])
 
   // 悬浮按钮内容
   const floatSlot = (
