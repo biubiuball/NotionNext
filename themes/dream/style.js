@@ -6,18 +6,12 @@
  */
 const Style = () => {
   return (<style jsx global>{`
-    // 底色
-    body{
-        background-color: #f5f5f5
-    }
-    .dark body{
-        background-color: black;
-    }
-  
+    /* 移除背景色设置，让全局背景图正常显示 */
+    
     /*  菜单下划线动画 */
     #theme-hexo .menu-link {
         text-decoration: none;
-        background-image: linear-gradient(#4338ca, #4338ca);
+        background-image: linear-gradient(#928CEE, #928CEE);
         background-repeat: no-repeat;
         background-position: bottom center;
         background-size: 0 2px;
@@ -26,7 +20,7 @@ const Style = () => {
     
     #theme-hexo .menu-link:hover {
         background-size: 100% 2px;
-        color: #4338ca;
+        color: #928CEE;
     }
 
     /* 设置了从上到下的渐变黑色 */
@@ -47,7 +41,7 @@ const Style = () => {
 
     // 选中字体颜色
     ::selection {
-        background: color-mix(in srgb, var(--theme-color) 30%, transparent);
+        background: rgba(45, 170, 219, 0.3);
     }
 
     // 自定义滚动条
@@ -60,13 +54,22 @@ const Style = () => {
         background: transparent;
     }
 
+    /* 滚动条颜色适配日夜模式 */
     ::-webkit-scrollbar-thumb {
-        background-color: #4338ca;
+        background-color: #49b1f5;
+    }
+    
+    .dark ::-webkit-scrollbar-thumb {
+        background-color: #6b7280;
     }
 
     * {
-        scrollbar-width:thin;
-        scrollbar-color: #4338ca transparent
+        scrollbar-width: thin;
+        scrollbar-color: #49b1f5 transparent;
+    }
+    
+    .dark * {
+        scrollbar-color: #6b7280 transparent;
     }
     
 
