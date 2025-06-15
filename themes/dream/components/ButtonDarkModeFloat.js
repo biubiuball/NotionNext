@@ -1,7 +1,7 @@
 import { siteConfig } from '@/lib/config'
 import { useGlobal } from '@/lib/global'
 import { saveDarkModeToLocalStorage } from '@/themes/theme'
-import CONFIG from './config'
+import CONFIG from '../config'
 import { useEffect } from 'react'
 
 /**
@@ -69,7 +69,7 @@ export default function ButtonDarkModeFloat() {
         id="darkModeButton"
         className={`${isDarkMode ? 'fa-sun' : 'fa-moon'} fas transform hover:scale-105 duration-200
            text-white bg-indigo-700 w-10 h-10 py-2.5 rounded-full dark:bg-black cursor-pointer`}
-        aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+
       />
     </div>
   );
