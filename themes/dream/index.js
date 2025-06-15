@@ -131,6 +131,7 @@ const LayoutBase = props => {
             }>
             <div
               className={`${className || ''} w-full ${fullWidth ? '' : 'max-w-4xl'} h-full`}>
+              {/* 主区块上侧 */}
               <Transition
                 show={!onLoading}
                 appear={true}
@@ -140,13 +141,12 @@ const LayoutBase = props => {
                 leave='transition ease-in-out duration-300 transform'
                 leaveFrom='opacity-100 translate-y-0'
                 leaveTo='opacity-0 -translate-y-16'
-                {/* 主区块上侧 */}
-				unmount={false}>
+                unmount={false}>
                 {slotTop}
                 {children}
               </Transition>
             </div>
-			{/* 右侧栏 */}
+            {/* 右侧栏 */}
             <SideRight {...props} />
           </div>
          
