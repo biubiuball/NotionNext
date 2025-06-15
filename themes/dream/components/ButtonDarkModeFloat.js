@@ -59,18 +59,21 @@ export default function ButtonDarkModeFloat() {
     saveDarkModeToLocalStorage(newStatus)
     updateDarkMode(newStatus)
     
-    const htmlElement = document.documentElement
-    htmlElement.classList.toggle('dark', newStatus)
-    htmlElement.classList.toggle('light', !newStatus)
-    
-    // 直接更新背景层z-index
-    const lightBg = document.querySelector('.light-bg')
-    const darkBg = document.querySelector('.dark-bg')
-    if (lightBg && darkBg) {
-      lightBg.style.zIndex = newStatus ? '-2' : '-1'
-      darkBg.style.zIndex = newStatus ? '-1' : '-2'
+    // 只在客户端执行DOM操作
+    if (typeof window !== 'undefined') {
+      const htmlElement = document.documentElement
+      htmlElement.classList.toggle('dark', newStatus)
+      htmlElement.classList.toggle('light', !newStatus)
+      
+      // 更新背景层z-index
+      const lightBg = document.querySelector('.light-bg')
+      const darkBg = document.querySelector('.dark-bg')
+      if (lightBg && darkBg) {
+        lightBg.style.zIndex = newStatus ? '-2' : '-1'
+        darkBg.style.zIndex = newStatus ? '-1' : '-2'
+      }
     }
-  }
+  
 
   return (
     <div className={'justify-center items-center text-center'} onClick={handleChangeDarkMode}>
