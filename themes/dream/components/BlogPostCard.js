@@ -32,7 +32,7 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
         data-aos-anchor-placement='top-bottom'
         id='blog-post-card'
         className={`group md:h-56 w-full flex justify-between md:flex-row flex-col-reverse ${siteConfig('HEXO_POST_LIST_IMG_CROSSOVER', null, CONFIG) && index % 2 === 1 ? 'md:flex-row-reverse' : ''}
-                    overflow-hidden border dark:border-black rounded-xl bg-white dark:bg-hexo-black-gray`}>
+                    overflow-hidden border border-transparent rounded-xl bg-white/20 dark:bg-black/20 backdrop-filter backdrop-blur-sm`}
         {/* 文字内容 */}
         <BlogPostCardInfo
           index={index}
