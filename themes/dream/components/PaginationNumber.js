@@ -25,7 +25,8 @@ const PaginationNumber = ({ page, totalPage }) => {
         }}
         rel='prev'
         className={`${currentPage === 1 ? 'invisible' : 'block'} pb-0.5 hover:font-bold w-6 text-center cursor-pointer duration-200`}>
-        <i className='fas fa-angle-left' />
+        {/* 修改箭头颜色 */}
+        <i className='fas fa-angle-left' style={{ color: '#928CEE' }} />
       </Link>
 
       {pages}
@@ -38,7 +39,8 @@ const PaginationNumber = ({ page, totalPage }) => {
         }}
         rel='next'
         className={`${+showNext ? 'block' : 'invisible'} pb-0.5 hover:font-bold w-6 text-center cursor-pointer duration-200`}>
-        <i className='fas fa-angle-right' />
+        {/* 修改箭头颜色 */}
+        <i className='fas fa-angle-right' style={{ color: '#928CEE' }} />
       </Link>
     </div>
   )
@@ -51,6 +53,8 @@ function getPageElement(page, currentPage, pagePrefix) {
       href={page === 1 ? `${pagePrefix}/` : `${pagePrefix}/page/${page}`}
       key={page}
       passHref
+      // 统一设置所有页码颜色
+      style={{ color: '#928CEE' }}
       className={`${
         selected
           ? 'font-bold underline'
@@ -81,7 +85,8 @@ function generatePages(pagePrefix, page, currentPage, totalPage) {
       startPage = totalPage - dynamicGroupCount
     }
     if (startPage > 2) {
-      pages.push(<div key={-1} className="pb-0.5">...</div>)
+      // 修改省略号颜色
+      pages.push(<div key={-1} className="pb-0.5" style={{ color: '#928CEE' }}>...</div>)
     }
 
     for (let i = 0; i < dynamicGroupCount; i++) {
@@ -91,7 +96,8 @@ function generatePages(pagePrefix, page, currentPage, totalPage) {
     }
 
     if (startPage + dynamicGroupCount < totalPage) {
-      pages.push(<div key={-2} className="pb-0.5">...</div>)
+      // 修改省略号颜色
+      pages.push(<div key={-2} className="pb-0.5" style={{ color: '#928CEE' }}>...</div>)
     }
 
     pages.push(getPageElement(totalPage, page, pagePrefix))
