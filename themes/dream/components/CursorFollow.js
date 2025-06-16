@@ -1,5 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react';
 
+// 十六进制转RGB辅助函数
+const hexToRgb = (hex) => {
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return result ? [
+    parseInt(result[1], 16),
+    parseInt(result[2], 16),
+    parseInt(result[3], 16)
+  ] : [0, 0, 0];
+};
+
 const CursorFollow = () => {
   const containerRef = useRef(null);
   const particlesRef = useRef([]);
@@ -9,7 +19,7 @@ const CursorFollow = () => {
   const maxParticles = 130;
   const baseSize = 5;
   
-  // 优化的粒子配置
+  // 增强的粒子配置
   const particleConfig = {
     life: 650,
     sizeVariation: 1.1,
@@ -18,7 +28,9 @@ const CursorFollow = () => {
       '#FF3366', '#FF6633', '#FFAA33', '#99FF33',
       '#33FF99', '#33AAFF', '#6633FF', '#FF33AA'
     ],
-    glowIntensity: 0.8
+    glowIntensity: 1.2, // 增加发光强度
+    flickerIntensity: 0.3, // 闪烁强度
+    neonIntensity: 1.5 // 荧光效果强度
   };
 
   // 检测背景亮度
@@ -74,9 +86,15 @@ const CursorFollow = () => {
       const color = particleConfig.colorPalette[
         Math.floor(Math.random() * particleConfig.colorPalette.length)
       ];
+      const rgb = hexToRgb(color);
       
       // 根据背景类型调整粒子样式
       const isLightBg = bgType === 'light';
+      
+      // 增强的荧光效果
+      const neonEffect = isLightBg 
+        ? `drop-shadow(0 0 ${size * 0.8}px rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, 0.8))`
+        : `drop-shadow(0 0 ${size * 1.2}px rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, 0.6))`;
       
       Object.assign(particle.style, {
         position: 'absolute',
@@ -87,17 +105,22 @@ const CursorFollow = () => {
         borderRadius: '50%',
         pointerEvents: 'none',
         transform: `translate(${event.clientX}px, ${event.clientY}px)`,
-        willChange: 'transform, opacity',
+        willChange: 'transform, opacity, filter',
         background: isLightBg 
           ? `radial-gradient(circle at 30% 30%, white 0%, ${color} 70%)`
-          : color,
+          : `radial-gradient(circle at 30% 30%, ${color} 0%, ${color}40 100%)`,
         opacity: isLightBg ? '0.95' : '0.85',
-        // 双重发光效果：白色内发光 + 彩色外发光
+        // 增强的发光效果
         boxShadow: isLightBg
-          ? `inset 0 0 6px rgba(255, 255, 255, 0.9), 0 0 ${8 * particleConfig.glowIntensity}px rgba(0, 0, 0, 0.4)`
-          : `inset 0 0 8px rgba(255, 255, 255, 0.7), 0 0 ${10 * particleConfig.glowIntensity}px ${color}80`,
+          ? `inset 0 0 ${size * 0.8}px rgba(255, 255, 255, 0.95), 
+             0 0 ${size * 1.5}px rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, 0.7)`
+          : `inset 0 0 ${size}px rgba(255, 255, 255, 0.7), 
+             0 0 ${size * 2}px rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, 0.8)`,
         zIndex: '9999',
-        border: isLightBg ? '1px solid rgba(0,0,0,0.15)' : 'none'
+        border: isLightBg ? `1px solid rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, 0.4)` : 'none',
+        // 添加荧光滤镜
+        filter: neonEffect,
+        transition: 'filter 0.2s ease'
       });
       
       container.appendChild(particle);
@@ -111,7 +134,10 @@ const CursorFollow = () => {
         x: event.clientX,
         y: event.clientY,
         color,
-        isLightBg
+        rgb,
+        isLightBg,
+        baseFilter: neonEffect,
+        flickerOffset: Math.random() * 100 // 随机闪烁偏移
       });
     };
     
@@ -146,14 +172,24 @@ const CursorFollow = () => {
         const scale = 0.6 + lifeRatio * 0.4;
         p.element.style.transform = `translate(${p.x}px, ${p.y}px) scale(${scale})`;
         
-        // 随着时间减弱发光效果
+        // 发光效果随生命周期变化
         const glowSize = p.isLightBg 
-          ? 8 * particleConfig.glowIntensity * lifeRatio
-          : 10 * particleConfig.glowIntensity * lifeRatio;
+          ? p.size * 1.5 * particleConfig.glowIntensity * lifeRatio
+          : p.size * 2 * particleConfig.glowIntensity * lifeRatio;
         
         p.element.style.boxShadow = p.isLightBg
-          ? `inset 0 0 6px rgba(255, 255, 255, ${0.9 * lifeRatio}), 0 0 ${glowSize}px rgba(0, 0, 0, ${0.4 * lifeRatio})`
-          : `inset 0 0 8px rgba(255, 255, 255, ${0.7 * lifeRatio}), 0 0 ${glowSize}px ${p.color}80`;
+          ? `inset 0 0 ${p.size * 0.8}px rgba(255, 255, 255, ${0.95 * lifeRatio}), 
+             0 0 ${glowSize}px rgba(${p.rgb[0]}, ${p.rgb[1]}, ${p.rgb[2]}, ${0.7 * lifeRatio})`
+          : `inset 0 0 ${p.size}px rgba(255, 255, 255, ${0.7 * lifeRatio}), 
+             0 0 ${glowSize}px rgba(${p.rgb[0]}, ${p.rgb[1]}, ${p.rgb[2]}, ${0.8 * lifeRatio})`;
+        
+        // 荧光闪烁效果
+        const flicker = Math.sin(p.age * 0.02 + p.flickerOffset) * particleConfig.flickerIntensity;
+        const neonSize = p.isLightBg 
+          ? p.size * 0.8 * particleConfig.neonIntensity * (1 + flicker)
+          : p.size * 1.2 * particleConfig.neonIntensity * (1 + flicker);
+          
+        p.element.style.filter = `drop-shadow(0 0 ${neonSize}px rgba(${p.rgb[0]}, ${p.rgb[1]}, ${p.rgb[2]}, ${0.6 * lifeRatio}))`;
         
         // 移除过期粒子
         if (p.age >= particleConfig.life) {
@@ -193,8 +229,8 @@ const CursorFollow = () => {
         pointerEvents: 'none',
         overflow: 'hidden',
         zIndex: 9998,
-        // 使用双重混合模式增强效果
-        mixBlendMode: bgType === 'light' ? 'multiply' : 'screen'
+        // 优化混合模式
+        mixBlendMode: bgType === 'light' ? 'screen' : 'lighten'
       }}
     />
   );
