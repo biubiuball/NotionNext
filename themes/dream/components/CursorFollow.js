@@ -8,7 +8,6 @@ const CursorFollow = () => {
   const maxParticles = 120;
   const baseSize = 4;
   
-  // 优化的粒子配置
   const particleConfig = {
     life: 650,
     sizeVariation: 1.0,
@@ -33,13 +32,10 @@ const CursorFollow = () => {
       
       const particle = document.createElement('div');
       const size = baseSize * (1 + Math.random() * particleConfig.sizeVariation);
-      
-      // 随机选择颜色
       const color = particleConfig.colorPalette[
         Math.floor(Math.random() * particleConfig.colorPalette.length)
       ];
       
-      // 创建更柔和的粒子效果
       Object.assign(particle.style, {
         position: 'absolute',
         left: '0',
@@ -52,7 +48,6 @@ const CursorFollow = () => {
         willChange: 'transform, opacity',
         background: color,
         opacity: '0.92',
-        // 减少发光效果，避免遮挡内容
         boxShadow: `0 0 ${8 * particleConfig.glowIntensity}px ${color}80`,
         zIndex: '9999'
       });
@@ -73,7 +68,6 @@ const CursorFollow = () => {
     
     window.addEventListener('mousemove', handleMouseMove);
     
-    // 动画循环
     const animate = (timestamp) => {
       const particles = particlesRef.current;
       const deltaTime = timestamp - (lastTimeRef.current || timestamp);
@@ -83,27 +77,20 @@ const CursorFollow = () => {
         const p = particles[i];
         p.age += deltaTime;
         
-        // 物理更新
         p.x += p.vx;
         p.y += p.vy;
-        
-        // 柔和的重力效果
         p.vy += 0.018;
         
-        // 生命周期衰减
         const lifeRatio = 1 - Math.min(p.age / particleConfig.life, 1);
         const opacity = (0.92 * Math.sqrt(lifeRatio)).toFixed(2);
         p.element.style.opacity = opacity;
         
-        // 缩放效果
         const scale = 0.6 + lifeRatio * 0.4;
         p.element.style.transform = `translate(${p.x}px, ${p.y}px) scale(${scale})`;
         
-        // 随着时间减弱发光效果
         const glowSize = 8 * particleConfig.glowIntensity * lifeRatio;
         p.element.style.boxShadow = `0 0 ${glowSize}px ${p.color}80`;
         
-        // 移除过期粒子
         if (p.age >= particleConfig.life) {
           container.removeChild(p.element);
           particles.splice(i, 1);
@@ -115,7 +102,6 @@ const CursorFollow = () => {
     
     const animationId = requestAnimationFrame(animate);
     
-    // 清理函数
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
       cancelAnimationFrame(animationId);
@@ -141,7 +127,6 @@ const CursorFollow = () => {
         pointerEvents: 'none',
         overflow: 'hidden',
         zIndex: 9998,
-        // 使用更友好的混合模式
         mixBlendMode: 'screen'
       }}
     />
