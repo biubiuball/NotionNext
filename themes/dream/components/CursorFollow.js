@@ -4,19 +4,20 @@ const CursorFollow = () => {
   const containerRef = useRef(null);
   const particlesRef = useRef([]);
   const lastTimeRef = useRef(0);
-  const particleInterval = 16; // 粒子生成间隔(ms)，控制粒子密度
-  const maxParticles = 120; // 最大粒子数量限制
-  const baseSize = 4; // 基础粒子大小
+  const particleInterval = 16;
+  const maxParticles = 120;
+  const baseSize = 4;
   const particleConfig = {
-    life: 500, // 粒子生命周期
-    sizeVariation: 0.8, // 粒子大小变化系数
-    speedFactor: 1.8, // 粒子速度系数
-    opacityDecay: 0.02, // 透明度衰减速度
+    life: 500,
+    sizeVariation: 0.8,
+    speedFactor: 1.8,
+    opacityDecay: 0.02,
+    // 优化调色板：提高饱和度
     colorPalette: [
-      '#FF5252', '#FF4081', '#E040FB', '#7C4DFF',
-      '#536DFE', '#448AFF', '#40C4FF', '#18FFFF',
-      '#64FFDA', '#69F0AE', '#B2FF59', '#EEFF41'
-    ] // 优化后的颜色调色板
+      '#FF0000', '#FF1493', '#9400D3', '#4B0082',
+      '#0000FF', '#00BFFF', '#00FFFF', '#00FF00',
+      '#7FFF00', '#FFFF00', '#FFA500', '#FF4500'
+    ]
   };
   
   useEffect(() => {
@@ -25,11 +26,9 @@ const CursorFollow = () => {
     
     const handleMouseMove = (event) => {
       const now = Date.now();
-      // 控制粒子生成频率
       if (now - lastParticleTime < particleInterval) return;
       lastParticleTime = now;
       
-      // 粒子数量限制
       if (particlesRef.current.length >= maxParticles) return;
       
       const particle = document.createElement('div');
@@ -48,8 +47,13 @@ const CursorFollow = () => {
         background: particleConfig.colorPalette[
           Math.floor(Math.random() * particleConfig.colorPalette.length)
         ],
-        opacity: '0.8',
-        boxShadow: '0 0 8px currentColor'
+        opacity: '1', // 提高初始透明度
+        // 增强视觉效果：深色边框+发光效果
+        border: '1px solid rgba(0,0,0,0.3)',
+        boxShadow: `
+          inset 0 0 8px rgba(255,255,255,0.8),
+          0 0 12px currentColor
+        `
       });
       
       container.appendChild(particle);
@@ -67,30 +71,24 @@ const CursorFollow = () => {
     
     window.addEventListener('mousemove', handleMouseMove);
     
-    // 使用时间差(deltaTime)的动画循环
     const animate = (timestamp) => {
       const particles = particlesRef.current;
       const deltaTime = timestamp - (lastTimeRef.current || timestamp);
       lastTimeRef.current = timestamp;
       
-      // 从后向前遍历以便安全删除
       for (let i = particles.length - 1; i >= 0; i--) {
         const p = particles[i];
         p.age += deltaTime;
         
-        // 物理更新
         p.x += p.vx;
         p.y += p.vy;
         
-        // 添加重力效果
         p.vy += 0.03;
         
-        // 生命周期衰减
         const lifeRatio = 1 - Math.min(p.age / particleConfig.life, 1);
-        p.element.style.opacity = (0.8 * Math.sqrt(lifeRatio)).toFixed(2);
+        p.element.style.opacity = (Math.sqrt(lifeRatio)).toFixed(2); // 保持更高亮度
         p.element.style.transform = `translate(${p.x}px, ${p.y}px) scale(${0.5 + lifeRatio * 0.5})`;
         
-        // 移除过期粒子
         if (p.age >= particleConfig.life) {
           container.removeChild(p.element);
           particles.splice(i, 1);
@@ -102,7 +100,6 @@ const CursorFollow = () => {
     
     const animationId = requestAnimationFrame(animate);
     
-    // 清理函数
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
       cancelAnimationFrame(animationId);
@@ -128,7 +125,8 @@ const CursorFollow = () => {
         pointerEvents: 'none',
         overflow: 'hidden',
         zIndex: 9999,
-        mixBlendMode: 'screen' // 添加混合模式增强视觉效果
+        // 更合适的混合模式
+        mixBlendMode: 'darken'
       }}
     />
   );
