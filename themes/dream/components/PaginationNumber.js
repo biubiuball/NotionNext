@@ -67,14 +67,10 @@ function getPageElement(page, currentPage, pagePrefix) {
       href={page === 1 ? `${pagePrefix}/` : `${pagePrefix}/page/${page}`}
       key={page}
       passHref
-      className={`${
-        selected
+      className={`${selected
           ? 'font-bold bg-indigo-400/70 hover:bg-indigo-600/70 dark:bg-indigo-500/70 text-white'
           : 'text-indigo-400 hover:bg-indigo-400/30'
-      }
-      duration-500  hover:text-white
-      cursor-pointer pb-0.5 w-6 text-center rounded
-      `}>
+        } duration-500 hover:text-white cursor-pointer pb-0.5 w-6 text-center rounded`}>
       {page}
     </Link>
   )
@@ -116,4 +112,3 @@ function generatePages(pagePrefix, page, currentPage, totalPage) {
   return pages
 }
 export default PaginationNumber
-[file content end]
