@@ -277,7 +277,9 @@ const LayoutSlug = props => {
   }, [post])
   return (
     <>
-      <div className='w-full lg:hover:shadow lg:border rounded-t-xl lg:rounded-xl lg:px-2 lg:py-4 bg-white dark:bg-hexo-black-gray dark:border-black article'>
+      <div className='w-full lg:hover:shadow lg:border rounded-t-xl lg:rounded-xl lg:px-2 lg:py-4 
+               backdrop-filter backdrop-blur-md backdrop-saturate-150 bg-white/30 dark:bg-black/30 
+               border border-white/20 dark:border-gray-800 article'>
         {lock && <ArticleLock validPassword={validPassword} />}
 
         {!lock && post && (
