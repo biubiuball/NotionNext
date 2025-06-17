@@ -1,5 +1,3 @@
-[file name]: PaginationNumber.js
-[file content begin]
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
