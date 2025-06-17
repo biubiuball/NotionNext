@@ -1,7 +1,7 @@
 /* 全局背景图片与虚化效果 */
 :root {
   --bg-light-url: url('https://cdn.jsdelivr.net/gh/biubiuball/BlogImage/jpg/lightspot.jpeg');
-  --bg-dark-url: url('https://cdn.jsdelivr.net/gh/biubiuball/BlogImage/jpg/nightcity.jpg');
+  --bg-dark-url: url('https://cdn.jsdelivr.net/gh/biubiuball/BlogImage/jpg/skymoon.jpg');
 }
 
 /* 修复背景图样式 - 开始 */
