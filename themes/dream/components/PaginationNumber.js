@@ -1,6 +1,15 @@
+[file name]: PaginationNumber.js
+[file content begin]
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
+/**
+ * 数字翻页插件
+ * @param page 当前页码
+ * @param showNext 是否有下一页
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const PaginationNumber = ({ page, totalPage }) => {
   const router = useRouter()
   const currentPage = +page
@@ -13,7 +22,9 @@ const PaginationNumber = ({ page, totalPage }) => {
   const pages = generatePages(pagePrefix, page, currentPage, totalPage)
 
   return (
-    <div className='mt-10 mb-5 flex justify-center items-end font-medium py-3 space-x-2'>
+    <div className='mt-10 mb-5 flex justify-center items-end font-medium text-indigo-400 duration-500 py-3 space-x-2 
+                    backdrop-filter backdrop-blur-md backdrop-saturate-150 bg-white/30 dark:bg-black/30 
+                    border border-white/20 dark:border-gray-800 rounded-xl px-4'>
       {/* 上一页 */}
       <Link
         href={{
@@ -24,9 +35,8 @@ const PaginationNumber = ({ page, totalPage }) => {
           query: router.query.s ? { s: router.query.s } : {}
         }}
         rel='prev'
-        className={`${currentPage === 1 ? 'invisible' : 'block'} pb-0.5 hover:font-bold w-6 text-center cursor-pointer duration-200`}>
-        {/* 修改箭头颜色 */}
-        <i className='fas fa-angle-left' style={{ color: '#928CEE' }} />
+        className={`${currentPage === 1 ? 'invisible' : 'block'} pb-0.5 hover:bg-indigo-400/30 w-6 text-center cursor-pointer duration-200 hover:font-bold rounded`}>
+        <i className='fas fa-angle-left' />
       </Link>
 
       {pages}
@@ -38,14 +48,20 @@ const PaginationNumber = ({ page, totalPage }) => {
           query: router.query.s ? { s: router.query.s } : {}
         }}
         rel='next'
-        className={`${+showNext ? 'block' : 'invisible'} pb-0.5 hover:font-bold w-6 text-center cursor-pointer duration-200`}>
-        {/* 修改箭头颜色 */}
-        <i className='fas fa-angle-right' style={{ color: '#928CEE' }} />
+        className={`${+showNext ? 'block' : 'invisible'} pb-0.5 hover:bg-indigo-400/30 w-6 text-center cursor-pointer duration-200 hover:font-bold rounded`}>
+        <i className='fas fa-angle-right' />
       </Link>
     </div>
   )
 }
 
+/**
+ * 获取页码
+ * @param {*} page
+ * @param {*} currentPage
+ * @param {*} pagePrefix
+ * @returns
+ */
 function getPageElement(page, currentPage, pagePrefix) {
   const selected = page + '' === currentPage + ''
   return (
@@ -53,14 +69,13 @@ function getPageElement(page, currentPage, pagePrefix) {
       href={page === 1 ? `${pagePrefix}/` : `${pagePrefix}/page/${page}`}
       key={page}
       passHref
-      // 统一设置所有页码颜色
-      style={{ color: '#928CEE' }}
       className={`${
         selected
-          ? 'font-bold underline'
-          : 'hover:font-bold'
+          ? 'font-bold bg-indigo-400/70 hover:bg-indigo-600/70 dark:bg-indigo-500/70 text-white'
+          : 'text-indigo-400 hover:bg-indigo-400/30'
       }
-      duration-200 cursor-pointer pb-0.5 w-6 text-center
+      duration-500  hover:text-white
+      cursor-pointer pb-0.5 w-6 text-center rounded
       `}>
       {page}
     </Link>
@@ -69,7 +84,7 @@ function getPageElement(page, currentPage, pagePrefix) {
 
 function generatePages(pagePrefix, page, currentPage, totalPage) {
   const pages = []
-  const groupCount = 7
+  const groupCount = 7 // 最多显示页签数
   if (totalPage <= groupCount) {
     for (let i = 1; i <= totalPage; i++) {
       pages.push(getPageElement(i, page, pagePrefix))
@@ -85,8 +100,7 @@ function generatePages(pagePrefix, page, currentPage, totalPage) {
       startPage = totalPage - dynamicGroupCount
     }
     if (startPage > 2) {
-      // 修改省略号颜色
-      pages.push(<div key={-1} className="pb-0.5" style={{ color: '#928CEE' }}>...</div>)
+      pages.push(<div key={-1} className="text-indigo-400">... </div>)
     }
 
     for (let i = 0; i < dynamicGroupCount; i++) {
@@ -96,8 +110,7 @@ function generatePages(pagePrefix, page, currentPage, totalPage) {
     }
 
     if (startPage + dynamicGroupCount < totalPage) {
-      // 修改省略号颜色
-      pages.push(<div key={-2} className="pb-0.5" style={{ color: '#928CEE' }}>...</div>)
+      pages.push(<div key={-2} className="text-indigo-400">... </div>)
     }
 
     pages.push(getPageElement(totalPage, page, pagePrefix))
@@ -105,3 +118,4 @@ function generatePages(pagePrefix, page, currentPage, totalPage) {
   return pages
 }
 export default PaginationNumber
+[file content end]
