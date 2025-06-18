@@ -52,50 +52,36 @@ const Header = props => {
 
   const throttleMs = 200
 
-  const topNavStyleHandler = useCallback(
-    throttle(() => {
-      const scrollS = window.scrollY
-      const nav = document.querySelector('#sticky-nav')
-      // 首页和文章页会有头图
-      const header = document.querySelector('#header')
-      // 导航栏和头图是否重叠
-      const scrollInHeader =
-        header && (scrollS < 10 || scrollS < header?.clientHeight - 50) // 透明导航条的条件
+ const topNavStyleHandler = useCallback(
+  throttle(() => {
+    const scrollS = window.scrollY
+    const nav = document.querySelector('#sticky-nav')
+    const header = document.querySelector('#header')
+    // 导航栏和头图是否重叠
+    const scrollInHeader =
+      header && (scrollS < 10 || scrollS < header?.clientHeight - 50) // 透明导航条的条件
 
-      // const textWhite = header && scrollInHeader
+    // 文字颜色切换逻辑
+    if (scrollInHeader) {
+      nav && nav.classList.replace('text-black', 'text-white')
+    } else {
+      nav && nav.classList.replace('text-white', 'text-black')
+    }
 
-      if (scrollInHeader) {
-        nav && nav.classList.replace('bg-white', 'bg-none')
-        nav && nav.classList.replace('border', 'border-transparent')
-        nav && nav.classList.replace('drop-shadow-md', 'shadow-none')
-        nav && nav.classList.replace('dark:bg-hexo-black-gray', 'transparent')
-      } else {
-        nav && nav.classList.replace('bg-none', 'bg-white')
-        nav && nav.classList.replace('border-transparent', 'border')
-        nav && nav.classList.replace('shadow-none', 'drop-shadow-md')
-        nav && nav.classList.replace('transparent', 'dark:bg-hexo-black-gray')
-      }
-
-      if (scrollInHeader) {
-        nav && nav.classList.replace('text-black', 'text-white')
-      } else {
-        nav && nav.classList.replace('text-white', 'text-black')
-      }
-
-      // 导航栏不在头图里，且页面向下滚动一定程度 隐藏导航栏
-      const showNav =
-        scrollS <= windowTop ||
-        scrollS < 5 ||
-        (header && scrollS <= header.clientHeight + 100)
-      if (!showNav) {
-        nav && nav.classList.replace('top-0', '-top-20')
-        windowTop = scrollS
-      } else {
-        nav && nav.classList.replace('-top-20', 'top-0')
-        windowTop = scrollS
-      }
-    }, throttleMs)
-  )
+    // 导航栏不在头图里，且页面向下滚动一定程度 隐藏导航栏
+    const showNav =
+      scrollS <= windowTop ||
+      scrollS < 5 ||
+      (header && scrollS <= header.clientHeight + 100)
+    if (!showNav) {
+      nav && nav.classList.replace('top-0', '-top-20')
+      windowTop = scrollS
+    } else {
+      nav && nav.classList.replace('-top-20', 'top-0')
+      windowTop = scrollS
+    }
+  }, throttleMs)
+)
 
   const searchDrawerSlot = (
     <>
@@ -148,11 +134,10 @@ const Header = props => {
 
       {/* 导航栏 */}
       <div
-        id='sticky-nav'
-        style={{ backdropFilter: 'blur(3px)' }}
-        className={
-          'top-0 duration-300 transition-all  shadow-none fixed bg-none dark:bg-hexo-black-gray dark:text-gray-200 text-black w-full z-20 transform border-transparent dark:border-transparent'
-        }>
+       id='sticky-nav'
+       style={{ backdropFilter: 'blur(3px)' }}
+       className={'top-0 duration-300 transition-all shadow-none fixed bg-none dark:bg-transparent dark:text-gray-200 text-black w-full z-20 transform border-transparent dark:border-transparent'
+      }>
         <div className='w-full flex justify-between items-center px-4 py-2'>
           <div className='flex'>
             <Logo {...props} />
