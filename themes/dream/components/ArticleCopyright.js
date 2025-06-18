@@ -20,7 +20,10 @@ export default function ArticleCopyright () {
 
   return (
     <section className="dark:text-gray-300 mt-6 mx-1 ">
-      <ul className="overflow-x-auto whitespace-nowrap text-sm p-5 leading-8 border-l border-indigo-200 dark:border-indigo-800">
+      <ul className="overflow-x-auto whitespace-nowrap text-sm 
+              backdrop-filter backdrop-blur-md backdrop-saturate-150 
+              bg-white/10 dark:bg-black/10 
+              p-5 leading-8 border-l-2 border-indigo-500">
         <li>
           <strong className='mr-2'>{locale.COMMON.AUTHOR}:</strong>
           <Link href={'/about'} className="hover:underline">
