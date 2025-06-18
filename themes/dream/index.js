@@ -308,7 +308,7 @@ const LayoutSlug = props => {
             <div className='pt-4 border-dashed'></div>
 
             {/* 评论互动 */}
-            <div className='duration-200 overflow-x-auto rounded-xl backdrop-filter backdrop-blur-md backdrop-saturate-150 bg-white/20 dark:bg-black/20 px-3'>
+            <div className='duration-200 overflow-x-auto rounded-xl px-3'>
               <Comment frontMatter={post} />
             </div>
           </div>
