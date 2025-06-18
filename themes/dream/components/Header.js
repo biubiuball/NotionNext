@@ -61,14 +61,20 @@ const Header = props => {
     const scrollInHeader =
       header && (scrollS < 10 || scrollS < header?.clientHeight - 50) // 透明导航条的条件
 
-    // 文字颜色切换逻辑
+    // 背景和文字切换逻辑
     if (scrollInHeader) {
+      // 头图区域内：完全透明背景，白色文字
+      nav && nav.classList.replace('bg-white/10', 'bg-none')
+      nav && nav.classList.replace('dark:bg-black/10', 'dark:bg-none')
       nav && nav.classList.replace('text-black', 'text-white')
     } else {
+      // 滚动出头图区域：毛玻璃效果，黑色文字
+      nav && nav.classList.replace('bg-none', 'bg-white/10')
+      nav && nav.classList.replace('dark:bg-none', 'dark:bg-black/10')
       nav && nav.classList.replace('text-white', 'text-black')
     }
 
-    // 导航栏不在头图里，且页面向下滚动一定程度 隐藏导航栏
+    // 导航栏显示/隐藏逻辑
     const showNav =
       scrollS <= windowTop ||
       scrollS < 5 ||
@@ -82,7 +88,7 @@ const Header = props => {
     }
   }, throttleMs)
 )
-
+  
   const searchDrawerSlot = (
     <>
       {categories && (
@@ -136,8 +142,8 @@ const Header = props => {
       <div
        id='sticky-nav'
        style={{ backdropFilter: 'blur(3px)' }}
-       className={'top-0 duration-300 transition-all shadow-none fixed bg-none dark:bg-transparent dark:text-gray-200 text-black w-full z-20 transform border-transparent dark:border-transparent'
-      }>
+       className={'top-0 duration-300 transition-all shadow-none fixed bg-none dark:bg-none dark:text-gray-200 text-white w-full z-20 transform border-transparent dark:border-transparent backdrop-filter backdrop-blur-md backdrop-saturate-150'
+      }>   
         <div className='w-full flex justify-between items-center px-4 py-2'>
           <div className='flex'>
             <Logo {...props} />
