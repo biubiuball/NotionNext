@@ -11,6 +11,7 @@ import CategoryGroup from './CategoryGroup'
 import { InfoCard } from './InfoCard'
 import LatestPostsGroup from './LatestPostsGroup'
 import TagGroups from './TagGroups'
+import MenuGroupCard from './MenuGroupCard' // 添加MenuGroupCard导入
 
 const HexoRecentComments = dynamic(() => import('./HexoRecentComments'))
 const FaceBookPage = dynamic(
@@ -43,7 +44,10 @@ export default function SideRight(props) {
     showTag,
     rightAreaSlot,
     notice,
-    className
+    className,
+    postCount,       // 新增props
+    categoryOptions, // 新增props
+    tagOptions       // 新增props
   } = props
 
   const { locale } = useGlobal()
@@ -52,6 +56,16 @@ export default function SideRight(props) {
   if (post && post?.fullWidth) {
     return null
   }
+
+  // 判断是否显示组合卡片
+  const showCombinedCard = 
+    (siteConfig('HEXO_WIDGET_MENU_GROUP', null, CONFIG) && 
+    postCount !== undefined && 
+    categoryOptions && 
+    tagOptions) || 
+    (siteConfig('HEXO_WIDGET_LATEST_POSTS', null, CONFIG) && 
+    latestPosts && 
+    latestPosts.length > 0)
 
   return (
     <div
@@ -85,13 +99,32 @@ export default function SideRight(props) {
             <TagGroups tags={tags} currentTag={currentTag} />
           </Card>
         )}
-        {siteConfig('HEXO_WIDGET_LATEST_POSTS', null, CONFIG) &&
-          latestPosts &&
-          latestPosts.length > 0 && (
-            <Card>
+
+        {/* 组合卡片容器 */}
+        {showCombinedCard && (
+          <Card>
+            {/* 菜单组卡片 */}
+            {siteConfig('HEXO_WIDGET_MENU_GROUP', null, CONFIG) && 
+              postCount !== undefined && 
+              categoryOptions && 
+              tagOptions && (
+              <div className="mb-4">
+                <MenuGroupCard 
+                  postCount={postCount}
+                  categoryOptions={categoryOptions}
+                  tagOptions={tagOptions}
+                />
+              </div>
+            )}
+
+            {/* 最新文章组 */}
+            {siteConfig('HEXO_WIDGET_LATEST_POSTS', null, CONFIG) &&
+              latestPosts &&
+              latestPosts.length > 0 && (
               <LatestPostsGroup {...props} />
-            </Card>
-          )}
+            )}
+          </Card>
+        )}
 
         <Announcement post={notice} />
 
