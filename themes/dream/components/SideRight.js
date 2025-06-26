@@ -86,22 +86,23 @@ export default function SideRight(props) {
             <TagGroups tags={tags} currentTag={currentTag} />
           </Card>
         )}
-        <Card className="flex flex-col">
-  <div className="border-b dark:border-gray-600 pb-2 mb-3">
-    <MenuGroupCard 
-      postCount={props.postCount}
-      categoryOptions={props.categoryOptions}
-      tagOptions={props.tagOptions}
-    />
-  </div>
-  
-  {siteConfig('HEXO_WIDGET_LATEST_POSTS', null, CONFIG) &&
-    latestPosts &&
-    latestPosts.length > 0 && (
-      <LatestPostsGroup {...props} />
-  )}
-</Card>
+
+        {/* 组合 MenuGroupCard 和 LatestPostsGroup */}
+        <Card>
+          <div className="border-b dark:border-gray-600 pb-2 mb-3">
+            <MenuGroupCard 
+              postCount={props.postCount}
+              categoryOptions={props.categoryOptions}
+              tagOptions={props.tagOptions}
+            />
+          </div>
+          
+          {siteConfig('HEXO_WIDGET_LATEST_POSTS', null, CONFIG) &&
+            latestPosts &&
+            latestPosts.length > 0 && (
+              <LatestPostsGroup {...props} />
           )}
+        </Card>
 
         <Announcement post={notice} />
 
@@ -109,7 +110,6 @@ export default function SideRight(props) {
           siteConfig('COMMENT_WALINE_RECENT') && <HexoRecentComments />}
 
         {rightAreaSlot}
-
 
       </div>
     </div>
