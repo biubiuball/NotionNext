@@ -52,7 +52,7 @@ const MenuGroupCard = props => {
               href={link.href}
               target={link?.target}
               className={
-                'py-1 my-0.5 px-2 duration-300 text-base justify-center items-center cursor-pointer'
+                'py-0.5 my-0 px-2 duration-300 text-base justify-center items-center cursor-pointer' 
               }>
               <div className='w-full items-center justify-center hover:scale-105 duration-200 transform dark:hover:text-indigo-400 hover:text-indigo-600'>
                 <div className='text-center'>{link.name}</div>
