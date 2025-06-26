@@ -10,8 +10,8 @@ import Catalog from './Catalog'
 import CategoryGroup from './CategoryGroup'
 import { InfoCard } from './InfoCard'
 import LatestPostsGroup from './LatestPostsGroup'
+import MenuGroupCard from './MenuGroupCard' // 确保导入 MenuGroupCard
 import TagGroups from './TagGroups'
-import MenuGroupCard from './MenuGroupCard'
 
 const HexoRecentComments = dynamic(() => import('./HexoRecentComments'))
 const FaceBookPage = dynamic(
@@ -44,7 +44,10 @@ export default function SideRight(props) {
     showTag,
     rightAreaSlot,
     notice,
-    className
+    className,
+    postCount,
+    categoryOptions,
+    tagOptions
   } = props
 
   const { locale } = useGlobal()
@@ -87,13 +90,13 @@ export default function SideRight(props) {
           </Card>
         )}
 
-        {/* 组合 MenuGroupCard 和 LatestPostsGroup */}
-        <Card>
-          <div className="border-b dark:border-gray-600 pb-2 mb-3">
+        {/* 组合 MenuGroupCard 和 LatestPostsGroup - 无分隔线 & 减少边距 */}
+        <Card className="py-2"> {/* 减少卡片内边距 */}
+          <div className="mb-1"> {/* 减少下方边距 */}
             <MenuGroupCard 
-              postCount={props.postCount}
-              categoryOptions={props.categoryOptions}
-              tagOptions={props.tagOptions}
+              postCount={postCount}
+              categoryOptions={categoryOptions}
+              tagOptions={tagOptions}
             />
           </div>
           
