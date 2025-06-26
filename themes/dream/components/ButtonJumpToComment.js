@@ -20,11 +20,10 @@ const ButtonJumpToComment = () => {
     }
   }
 
-  return (
-    <div
-      className="fas fa-comments text-white text-sm bg-indigo-700 w-10 h-10 rounded-full dark:bg-indigo-600 flex items-center justify-center"
-      onClick={navToComment}>
-      <i className='cursor-pointer transform hover:scale-105 duration-200' />
+  return <div 
+    className={'justify-center items-center text-center'} onClick={navToComment}>
+        <i className={`fas fa-comments transform hover:scale-105 duration-200 text-white
+         text-sm  bg-indigo-700 w-10 h-10 rounded-full dark:bg-black cursor-pointer py-3`} />
     </div>
   )
 }
