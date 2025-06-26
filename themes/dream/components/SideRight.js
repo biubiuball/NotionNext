@@ -11,6 +11,7 @@ import CategoryGroup from './CategoryGroup'
 import { InfoCard } from './InfoCard'
 import LatestPostsGroup from './LatestPostsGroup'
 import TagGroups from './TagGroups'
+import MenuGroupCard from './MenuGroupCard'
 
 const HexoRecentComments = dynamic(() => import('./HexoRecentComments'))
 const FaceBookPage = dynamic(
@@ -85,12 +86,21 @@ export default function SideRight(props) {
             <TagGroups tags={tags} currentTag={currentTag} />
           </Card>
         )}
-        {siteConfig('HEXO_WIDGET_LATEST_POSTS', null, CONFIG) &&
-          latestPosts &&
-          latestPosts.length > 0 && (
-            <Card>
-              <LatestPostsGroup {...props} />
-            </Card>
+        <Card className="flex flex-col">
+  <div className="border-b dark:border-gray-600 pb-2 mb-3">
+    <MenuGroupCard 
+      postCount={props.postCount}
+      categoryOptions={props.categoryOptions}
+      tagOptions={props.tagOptions}
+    />
+  </div>
+  
+  {siteConfig('HEXO_WIDGET_LATEST_POSTS', null, CONFIG) &&
+    latestPosts &&
+    latestPosts.length > 0 && (
+      <LatestPostsGroup {...props} />
+  )}
+</Card>
           )}
 
         <Announcement post={notice} />
