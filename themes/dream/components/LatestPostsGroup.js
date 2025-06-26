@@ -12,7 +12,7 @@ const LatestPostsGroup = ({ latestPosts, siteInfo }) => {
   }
 
   return (
-    <div className='space-y-2'>
+    <div className='space-y-3'> {/* 增加垂直间距 */}
       {latestPosts.map(post => {
         const headerImage = post?.pageCoverThumbnail
           ? post.pageCoverThumbnail
@@ -26,7 +26,8 @@ const LatestPostsGroup = ({ latestPosts, siteInfo }) => {
             href={post?.href}
             passHref
             className={'flex hover:bg-gray-50 dark:hover:bg-gray-700 p-1 rounded'}>
-            <div className='w-16 h-12 overflow-hidden relative flex-shrink-0'>
+   
+            <div className='w-20 h-14 overflow-hidden relative flex-shrink-0'>
               <LazyImage
                 alt={post?.title}
                 src={`${headerImage}`}
@@ -36,12 +37,13 @@ const LatestPostsGroup = ({ latestPosts, siteInfo }) => {
             <div
               className={
                 (selected ? ' text-indigo-400 ' : 'dark:text-gray-400 ') +
-                ' text-xs overflow-x-hidden hover:text-indigo-600 px-2 duration-200 w-full rounded ' +
+                ' text-sm overflow-x-hidden hover:text-indigo-600 px-2 duration-200 w-full rounded ' + // 恢复 text-sm
                 ' hover:text-indigo-400 cursor-pointer flex items-center'
               }>
               <div className='flex-1 min-w-0'>
-                <div className='line-clamp-2 menu-link font-medium'>{post.title}</div>
-                <div className='text-gray-500 text-xs mt-0.5'>{post.lastEditedDay}</div>
+
+                <div className='line-clamp-2 menu-link'>{post.title}</div>
+                <div className='text-gray-500'>{post.lastEditedDay}</div> 
               </div>
             </div>
           </Link>
