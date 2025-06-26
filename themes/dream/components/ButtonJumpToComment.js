@@ -18,10 +18,6 @@ const ButtonJumpToComment = () => {
         behavior: 'smooth'
       })
     }
-    // 兼容性不好
-    // const commentElement = document.getElementById('comment')
-    // if (commentElement) {
-    // commentElement?.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' })
   }
 
   return (
