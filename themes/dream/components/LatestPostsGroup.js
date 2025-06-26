@@ -1,32 +1,18 @@
 import LazyImage from '@/components/LazyImage'
 import { useGlobal } from '@/lib/global'
-// import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-/**
- * 最新文章列表
- * @param posts 所有文章数据
- * @param sliceCount 截取展示的数量 默认6
- * @constructor
- */
 const LatestPostsGroup = ({ latestPosts, siteInfo }) => {
-  // 获取当前路径
   const currentPath = useRouter().asPath
   const { locale } = useGlobal()
 
-  if (!latestPosts) {
-    return <></>
+  if (!latestPosts || latestPosts.length === 0) {
+    return null
   }
 
   return (
-    <>
-      <div className=' mb-2 px-1 flex flex-nowrap justify-between'>
-        <div>
-          <i className='mr-2 fas fas fa-history' />
-          {locale.COMMON.LATEST_POSTS}
-        </div>
-      </div>
+    <div className='space-y-2'>
       {latestPosts.map(post => {
         const headerImage = post?.pageCoverThumbnail
           ? post.pageCoverThumbnail
@@ -39,8 +25,8 @@ const LatestPostsGroup = ({ latestPosts, siteInfo }) => {
             title={post.title}
             href={post?.href}
             passHref
-            className={'my-3 flex'}>
-            <div className='w-20 h-14 overflow-hidden relative'>
+            className={'flex hover:bg-gray-50 dark:hover:bg-gray-700 p-1 rounded'}>
+            <div className='w-16 h-12 overflow-hidden relative flex-shrink-0'>
               <LazyImage
                 alt={post?.title}
                 src={`${headerImage}`}
@@ -50,18 +36,18 @@ const LatestPostsGroup = ({ latestPosts, siteInfo }) => {
             <div
               className={
                 (selected ? ' text-indigo-400 ' : 'dark:text-gray-400 ') +
-                ' text-sm overflow-x-hidden hover:text-indigo-600 px-2 duration-200 w-full rounded ' +
-                ' hover:text-indigo-400 cursor-pointer items-center flex'
+                ' text-xs overflow-x-hidden hover:text-indigo-600 px-2 duration-200 w-full rounded ' +
+                ' hover:text-indigo-400 cursor-pointer flex items-center'
               }>
-              <div>
-                <div className='line-clamp-2 menu-link'>{post.title}</div>
-                <div className='text-gray-500'>{post.lastEditedDay}</div>
+              <div className='flex-1 min-w-0'>
+                <div className='line-clamp-2 menu-link font-medium'>{post.title}</div>
+                <div className='text-gray-500 text-xs mt-0.5'>{post.lastEditedDay}</div>
               </div>
             </div>
           </Link>
         )
       })}
-    </>
+    </div>
   )
 }
 export default LatestPostsGroup
