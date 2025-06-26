@@ -7,15 +7,13 @@ import { siteConfig } from '@/lib/config'
  * @constructor
  */
 const ButtonJumpToComment = () => {
-  if (!siteConfig('MATERY_WIDGET_TO_COMMENT', null, CONFIG)) {
+  if (!siteConfig('HEXO_WIDGET_TO_COMMENT', null, CONFIG)) {
     return null;
   }
 
   function navToComment() {
     const commentElement = document.getElementById('comment');
     if (commentElement) {
-      // 考虑头部固定导航栏的高度
-      const headerHeight = 80; // 根据实际头部高度调整
       const targetPosition = commentElement.offsetTop - headerHeight;
       window.scrollTo({ 
         top: targetPosition, 
