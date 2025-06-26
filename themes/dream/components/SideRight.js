@@ -86,8 +86,17 @@ export default function SideRight(props) {
         )}
 
         {/* 组合卡片 - 添加统一标题 */}
-        <Card className="py-2">
-          <div className="mb-1">
+        <Card className="py-1">
+          {/* 站点导航标题 */}
+          <div className='mb-1 px-1'>
+            <div className='flex items-center text-sm font-medium'>
+              <i className='mr-2 fas fa-compass' />
+              站点导航
+            </div>
+          </div>
+          
+          {/* 菜单卡片 */}
+          <div className="mb-0.5"> 
             <MenuGroupCard 
               postCount={postCount}
               categoryOptions={categoryOptions}
@@ -99,8 +108,8 @@ export default function SideRight(props) {
             latestPosts &&
             latestPosts.length > 0 && (
               <>
-                {/* 在最新文章上方添加标题 */}
-                <div className='mb-2 px-1 mt-3 border-t dark:border-gray-700 pt-2'>
+                {/* 最新文章标题 - 无分隔线 */}
+                <div className='mb-1 px-1 mt-2'> 
                   <div className='flex items-center text-sm font-medium'>
                     <i className='mr-2 fas fa-history' />
                     {locale.COMMON.LATEST_POSTS}
