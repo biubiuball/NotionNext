@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router'
 import Card from './Card'
 import SocialButton from './SocialButton'
-import MenuGroupCard from './MenuGroupCard'
 import LazyImage from '@/components/LazyImage'
 import { siteConfig } from '@/lib/config'
 
@@ -26,7 +25,6 @@ export function InfoCard(props) {
             </div>
 
             <div className='text-sm text-center'>{siteConfig('BIO')}</div>
-            <MenuGroupCard {...props} />
            
         </Card>
   )
