@@ -14,9 +14,15 @@ const TocDrawerButton = (props) => {
   if (!siteConfig('HEXO_WIDGET_TOC', null, CONFIG)) {
     return <></>
   }
-  return (<div onClick={props.onClick} className='py-2 px-3 cursor-pointer transform duration-200 flex justify-center items-center w-7 h-7 text-center' title={locale.POST.TOP} >
-    <i className='fas fa-list-ol text-xs'/>
-  </div>)
+  return (
+    <div 
+      onClick={props.onClick} 
+      className="text-white w-10 h-10 flex items-center justify-center rounded-full transform hover:scale-105 duration-200
+         bg-indigo-700 dark:bg-black cursor-pointer"
+      title={locale.POST.TOP}>
+      <i className='fas fa-list-ol text-sm'/>
+    </div>
+        )
 }
 
 export default TocDrawerButton
