@@ -26,7 +26,7 @@ const ButtonJumpToComment = () => {
     onClick={navToComment}
   >
     <i 
-      id="commentButton" 
+      id="darkModeButton"
       className={`fas fa-comments transform hover:scale-105 duration-200 text-white text-sm bg-indigo-700 w-10 h-10 rounded-full dark:bg-black cursor-pointer flex items-center justify-center`} // 添加了 flex 布局类
     />
   </div>
