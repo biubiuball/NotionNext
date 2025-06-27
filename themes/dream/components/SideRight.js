@@ -10,7 +10,6 @@ import Catalog from './Catalog'
 import CategoryGroup from './CategoryGroup'
 import { InfoCard } from './InfoCard'
 import LatestPostsGroup from './LatestPostsGroup'
-import MenuGroupCard from './MenuGroupCard'
 import TagGroups from './TagGroups'
 
 const HexoRecentComments = dynamic(() => import('./HexoRecentComments'))
@@ -27,6 +26,11 @@ const FaceBookPage = dynamic(
   { ssr: false }
 )
 
+/**
+ * Hexo主题右侧栏
+ * @param {*} props
+ * @returns
+ */
 export default function SideRight(props) {
   const {
     post,
@@ -39,15 +43,12 @@ export default function SideRight(props) {
     showTag,
     rightAreaSlot,
     notice,
-    className,
-    postCount,
-    categoryOptions,
-    tagOptions,
-    siteInfo
+    className
   } = props
 
   const { locale } = useGlobal()
 
+  // 文章全屏处理
   if (post && post?.fullWidth) {
     return null
   }
@@ -55,7 +56,7 @@ export default function SideRight(props) {
   return (
     <div
       id='sideRight'
-      className={`lg:w-80 lg:pt-8 ${post ? 'lg:pt-0' : 'lg:pt-4'}`}>
+      className={` lg:w-80 lg:pt-8 ${post ? 'lg:pt-0' : 'lg:pt-4'}`}>
       <div className='sticky top-8 space-y-4'>
         {post && post.toc && post.toc.length > 1 && (
           <Card>
@@ -70,7 +71,7 @@ export default function SideRight(props) {
 
         {showCategory && (
           <Card>
-            <div className='ml-2 mb-1'>
+            <div className='ml-2 mb-1 '>
               <i className='fas fa-th' /> {locale.COMMON.CATEGORY}
             </div>
             <CategoryGroup
@@ -84,44 +85,13 @@ export default function SideRight(props) {
             <TagGroups tags={tags} currentTag={currentTag} />
           </Card>
         )}
-
-        {/* 组合卡片 - 添加统一标题 */}
-        <Card className="py-6"> {/* 增加内边距为 py-6 */}
-          {/* 站点导航标题 */}
-          <div className='mb-1 px-1'>
-            <div className='flex items-center text-sm font-medium'>
-              <i className='mr-2 fas fa-compass' />
-              站点导航
-            </div>
-          </div>
-          
-          {/* 菜单卡片 */}
-          <div className="mb-0.5">
-            <MenuGroupCard 
-              postCount={postCount}
-              categoryOptions={categoryOptions}
-              tagOptions={tagOptions}
-            />
-          </div>
-          
-          {siteConfig('HEXO_WIDGET_LATEST_POSTS', null, CONFIG) &&
-            latestPosts &&
-            latestPosts.length > 0 && (
-              <>
-                {/* 最新文章标题 */}
-                <div className='mb-1 px-1'>
-                  <div className='flex items-center text-sm font-medium'>
-                    <i className='mr-2 fas fa-history' />
-                    {locale.COMMON.LATEST_POSTS}
-                  </div>
-                </div>
-                <LatestPostsGroup 
-                  latestPosts={latestPosts} 
-                  siteInfo={siteInfo} 
-                />
-              </>
+        {siteConfig('HEXO_WIDGET_LATEST_POSTS', null, CONFIG) &&
+          latestPosts &&
+          latestPosts.length > 0 && (
+            <Card>
+              <LatestPostsGroup {...props} />
+            </Card>
           )}
-        </Card>
 
         <Announcement post={notice} />
 
@@ -129,8 +99,7 @@ export default function SideRight(props) {
           siteConfig('COMMENT_WALINE_RECENT') && <HexoRecentComments />}
 
         {rightAreaSlot}
-        <FaceBookPage />
-        <Live2D />
+
       </div>
     </div>
   )
