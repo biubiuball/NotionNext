@@ -3,6 +3,7 @@ import Card from './Card'
 import SocialButton from './SocialButton'
 import LazyImage from '@/components/LazyImage'
 import { siteConfig } from '@/lib/config'
+import Hitokoto from './Hitokoto' // 导入一言组件
 
 /**
  * 社交信息卡
@@ -24,7 +25,10 @@ export function InfoCard(props) {
                 <LazyImage src={siteInfo?.icon} className='rounded-full' width={120} alt={siteConfig('AUTHOR')} />
             </div>
 
-            <div className='text-sm text-center'>{siteConfig('BIO')}</div>
+            {/* 替换原有BIO文本为Hitokoto组件 */}
+            <div className='text-sm text-center px-4 py-2'>
+                <Hitokoto />
+            </div>
            
         </Card>
   )
