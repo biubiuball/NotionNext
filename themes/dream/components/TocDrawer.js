@@ -35,3 +35,4 @@ const TocDrawer = ({ post, cRef }) => {
          onClick={switchVisible} />
   </>
 }
+export TocDrawer
