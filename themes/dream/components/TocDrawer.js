@@ -20,22 +20,22 @@ const TocDrawer = ({ post, cRef }) => {
     switchShowDrawer(!showDrawer)
   }
   return <>
-    {/* 添加 hidden lg:block 控制小屏幕隐藏 */}
-    <div className='fixed top-0 right-0 z-40 hidden lg:block'>
+    <div className='fixed top-0 right-0 z-40 '>
       {/* 悬浮目录 */}
       <div
-        className={`fixed top-0 right-0 w-72 h-full bg-white shadow-xl transform transition-transform duration-300 ease-in-out ${
-          showDrawer ? 'translate-x-0' : 'translate-x-full'
-        }`}
-      >
-        <Catalog toc={post.toc} />
+        className={(showDrawer ? 'animate__slideInRight ' : ' -mr-72 animate__slideOutRight') +
+        ' shadow-card animate__animated animate__faster' +
+        ' w-60 duration-200 fixed right-12 bottom-12 rounded py-2 bg-white dark:bg-gray-900'}>
+          {post && <>
+           <div className='dark:text-gray-400 text-gray-600'>
+             <Catalog toc={post.toc}/>
+           </div>
+          </>
+          }
       </div>
     </div>
-    {/* 背景蒙版 - 添加响应式隐藏 */}
-    <div id='right-drawer-background' 
-         className={`fixed top-0 left-0 z-30 w-full h-full hidden ${
-           showDrawer ? 'lg:block' : 'lg:hidden'
-         }`}
+    {/* 背景蒙版 */}
+    <div id='right-drawer-background' className={(showDrawer ? 'block' : 'hidden') + ' fixed top-0 left-0 z-30 w-full h-full'}
          onClick={switchVisible} />
   </>
 }
