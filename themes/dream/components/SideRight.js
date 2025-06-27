@@ -65,9 +65,11 @@ export default function SideRight(props) {
       className={` lg:w-80 lg:pt-8 ${post ? 'lg:pt-0' : 'lg:pt-4'}`}>
       <div className='sticky top-8 space-y-4'>
         {post && post.toc && post.toc.length > 1 && (
-          <Card>
-            <Catalog toc={post.toc} />
-          </Card>
+          <div className='hidden lg:block'>
+            <Card>
+              <Catalog toc={post.toc} />
+            </Card>
+          </div>
         )}
 
         <InfoCard {...props} />
