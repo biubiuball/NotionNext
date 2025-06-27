@@ -24,14 +24,18 @@ const TocDrawer = ({ post, cRef }) => {
     <div className='fixed top-0 right-0 z-40 hidden lg:block'>
       {/* 悬浮目录 */}
       <div
-        className={(showDrawer ? 'animate__slideInRight ' : ' -mr-72 animate__slideOutRight') +
-
-          }
+        className={`fixed top-0 right-0 w-72 h-full bg-white shadow-xl transform transition-transform duration-300 ease-in-out ${
+          showDrawer ? 'translate-x-0' : 'translate-x-full'
+        }`}
+      >
+        <Catalog toc={post.toc} />
       </div>
     </div>
     {/* 背景蒙版 - 添加响应式隐藏 */}
     <div id='right-drawer-background' 
-         className={(showDrawer ? 'lg:block' : 'lg:hidden') + ' fixed top-0 left-0 z-30 w-full h-full hidden'} Add comment更多操作
+         className={`fixed top-0 left-0 z-30 w-full h-full hidden ${
+           showDrawer ? 'lg:block' : 'lg:hidden'
+         }`}
          onClick={switchVisible} />
   </>
 }
