@@ -11,6 +11,8 @@ import CategoryGroup from './CategoryGroup'
 import { InfoCard } from './InfoCard'
 import LatestPostsGroup from './LatestPostsGroup'
 import TagGroups from './TagGroups'
+import MenuGroupCard from './MenuGroupCard'
+import SidebarCardContainer from './SidebarCardContainer' // 引入整合容器组件
 
 const HexoRecentComments = dynamic(() => import('./HexoRecentComments'))
 const FaceBookPage = dynamic(
@@ -43,7 +45,11 @@ export default function SideRight(props) {
     showTag,
     rightAreaSlot,
     notice,
-    className
+    className,
+    postCount, // 新增：文章总数
+    categoryOptions, // 新增：分类选项
+    tagOptions, // 新增：标签选项
+    siteInfo // 新增：站点信息
   } = props
 
   const { locale } = useGlobal()
@@ -65,6 +71,16 @@ export default function SideRight(props) {
         )}
 
         <InfoCard {...props} />
+        
+        {/* 添加整合的卡片容器 */}
+        <SidebarCardContainer 
+          latestPosts={latestPosts}
+          siteInfo={siteInfo}
+          postCount={postCount}
+          categoryOptions={categoryOptions}
+          tagOptions={tagOptions}
+        />
+        
         {siteConfig('HEXO_WIDGET_ANALYTICS', null, CONFIG) && (
           <AnalyticsCard {...props} />
         )}
@@ -85,21 +101,16 @@ export default function SideRight(props) {
             <TagGroups tags={tags} currentTag={currentTag} />
           </Card>
         )}
-        {siteConfig('HEXO_WIDGET_LATEST_POSTS', null, CONFIG) &&
-          latestPosts &&
-          latestPosts.length > 0 && (
-            <Card>
-              <LatestPostsGroup {...props} />
-            </Card>
-          )}
-
+        
+        {/* 移除原有的LatestPostsGroup，因为它已包含在SidebarCardContainer中 */}
+        
         <Announcement post={notice} />
 
         {siteConfig('COMMENT_WALINE_SERVER_URL') &&
           siteConfig('COMMENT_WALINE_RECENT') && <HexoRecentComments />}
 
         {rightAreaSlot}
-
+        
       </div>
     </div>
   )
