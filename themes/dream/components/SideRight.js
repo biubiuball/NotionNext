@@ -73,13 +73,14 @@ export default function SideRight(props) {
         <InfoCard {...props} />
         
         {/* 添加整合的卡片容器 */}
-        <SidebarCardContainer 
-          latestPosts={latestPosts}
-          siteInfo={siteInfo}
-          postCount={postCount}
-          categoryOptions={categoryOptions}
-          tagOptions={tagOptions}
-        />
+        <Card>
+            <SidebarCardContainer 
+             latestPosts={latestPosts}
+             siteInfo={siteInfo}
+             postCount={postCount}
+             categoryOptions={categoryOptions}
+             tagOptions={tagOptions} />
+       </Card>
         
         {siteConfig('HEXO_WIDGET_ANALYTICS', null, CONFIG) && (
           <AnalyticsCard {...props} />
@@ -102,7 +103,6 @@ export default function SideRight(props) {
           </Card>
         )}
         
-        {/* 移除原有的LatestPostsGroup，因为它已包含在SidebarCardContainer中 */}
         
         <Announcement post={notice} />
 
