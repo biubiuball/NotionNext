@@ -83,7 +83,70 @@ const Style = () => {
     .dark * {
         scrollbar-color: #6b7280 transparent;
     }
+
     
+    .hitokoto-container {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, 
+               Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  max-width: 100%;
+  padding: 8px 0;
+  position: relative;
+}
+
+.hitokoto-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.quote-text {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #333;
+  margin-bottom: 4px;
+  text-align: center;
+  transition: all 0.3s ease;
+  padding: 0 10px;
+}
+
+.quote-author {
+  font-size: 0.9rem;
+  color: #666;
+  text-align: right;
+  font-style: italic;
+  padding-right: 15px;
+  opacity: 0.8;
+  transition: all 0.3s ease;
+}
+
+.hitokoto-content:hover .quote-text {
+  color: #2c3e50;
+}
+
+.hitokoto-content:hover .quote-author {
+  color: #4a5568;
+  opacity: 1;
+}
+
+.hitokoto-loading {
+  font-size: 1rem;
+  color: #666;
+  text-align: center;
+  padding: 10px;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { opacity: 0.6; }
+}
+
+.hitokoto-error {
+  font-size: 1rem;
+  color: #d32f2f;
+  text-align: center;
+  padding: 10px;
+}
 
   `}</style>)
 }
