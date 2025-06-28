@@ -21,8 +21,9 @@ const LatestPostsGroup = ({ latestPosts, siteInfo }) => {
 
   return (
     <>
-      <div className=' mb-2 px-1 flex flex-nowrap justify-between'>
-        <div className='text-gray-400 dark:text-gray-200'> {/* 亮模式浅灰，暗模式亮白 */}
+      <div className='mb-2 px-1 flex flex-nowrap justify-between'>
+        {/* 使用text-gray-800替代#333 */}
+        <div className='text-gray-800 dark:text-gray-200'>
           <i className='mr-2 fas fas fa-history' />
           {locale.COMMON.LATEST_POSTS}
         </div>
@@ -49,14 +50,14 @@ const LatestPostsGroup = ({ latestPosts, siteInfo }) => {
             </div>
             <div
               className={
-                (selected ? ' text-indigo-400 ' : 'text-gray-400 dark:text-gray-200 ') + 
+                (selected ? ' text-indigo-400 ' : 'text-gray-800 dark:text-gray-200 ') + 
                 ' text-sm overflow-x-hidden hover:text-indigo-600 px-2 duration-200 w-full rounded ' +
                 ' hover:text-indigo-400 cursor-pointer items-center flex'
               }>
               <div>
                 <div className='line-clamp-2 menu-link'>{post.title}</div>
-                {/* 修改这里：调整最后编辑日期的颜色 */}
-                <div className='text-gray-400 dark:text-gray-200'>{post.lastEditedDay}</div>
+                {/* 使用text-gray-800替代#333 */}
+                <div className='text-gray-800 dark:text-gray-200'>{post.lastEditedDay}</div>
               </div>
             </div>
           </Link>
