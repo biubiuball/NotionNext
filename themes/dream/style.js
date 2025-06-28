@@ -93,6 +93,7 @@ const Style = () => {
   position: relative;
 }
 
+/* 亮色模式样式 */
 .hitokoto-content {
   display: flex;
   flex-direction: column;
@@ -118,34 +119,89 @@ const Style = () => {
   transition: all 0.3s ease;
 }
 
-.hitokoto-content:hover .quote-text {
-  color: #2c3e50;
-}
-
-.hitokoto-content:hover .quote-author {
-  color: #4a5568;
-  opacity: 1;
-}
-
 .hitokoto-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
   font-size: 1rem;
   color: #666;
   text-align: center;
   padding: 10px;
-  animation: pulse 1.5s infinite;
 }
 
-@keyframes pulse {
-  0% { opacity: 0.6; }
-  50% { opacity: 1; }
-  100% { opacity: 0.6; }
+.spinner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid rgba(79, 192, 210, 0.2);
+  border-top: 3px solid #4fc0d2;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .hitokoto-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
   font-size: 1rem;
   color: #d32f2f;
   text-align: center;
   padding: 10px;
+}
+
+.error-icon {
+  font-size: 1.5rem;
+}
+
+/* 暗色模式样式 */
+@media (prefers-color-scheme: dark) {
+  .quote-text {
+    color: #e2e8f0;
+  }
+  
+  .quote-author {
+    color: #a0aec0;
+  }
+  
+  .hitokoto-loading {
+    color: #a0aec0;
+  }
+  
+  .spinner {
+    border: 3px solid rgba(160, 174, 192, 0.2);
+    border-top: 3px solid #63b3ed;
+  }
+  
+  .hitokoto-error {
+    color: #fc8181;
+  }
+}
+
+/* 深色模式悬停效果 */
+.hitokoto-content:hover .quote-text {
+  color: #4fc0d2;
+}
+
+.hitokoto-content:hover .quote-author {
+  color: #63b3ed;
+  opacity: 1;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .quote-text {
+    font-size: 1rem;
+  }
+  
+  .quote-author {
+    font-size: 0.85rem;
+  }
 }
 
   `}</style>)
