@@ -3,8 +3,7 @@ import Card from './Card'
 import SocialButton from './SocialButton'
 import LazyImage from '@/components/LazyImage'
 import { siteConfig } from '@/lib/config'
-import Hitokoto from './Hitokoto' // 导入一言组件
-
+import Hitokoto from './Hitokoto'
 /**
  * 社交信息卡
  * @param {*} props
@@ -26,7 +25,7 @@ export function InfoCard(props) {
             </div>
 
             {/* 替换原有BIO文本为Hitokoto组件 */}
-            <div className='text-sm text-center px-4 py-2'>
+            <div className='px-4 py-2'>
                 <Hitokoto />
             </div>
            
