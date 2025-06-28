@@ -11,7 +11,7 @@ const Hitokoto = () => {
       setLoading(true);
       setError(false);
       
-      const response = await fetch('https://v1.hitokoto.cn');
+      const response = await fetch('https://international.v1.hitokoto.cn/?c=e&c=h&c=j');
       const data = await response.json();
       
       setQuote({
