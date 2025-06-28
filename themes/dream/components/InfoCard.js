@@ -3,7 +3,8 @@ import Card from './Card'
 import SocialButton from './SocialButton'
 import LazyImage from '@/components/LazyImage'
 import { siteConfig } from '@/lib/config'
-import Hitokoto from './Hitokoto'
+import Hitokoto from './Hitokoto' // 导入一言组件
+
 /**
  * 社交信息卡
  * @param {*} props
@@ -15,7 +16,7 @@ export function InfoCard(props) {
   return (
         <Card className={className}>
             <div
-                className='justify-center items-center flex py-6 dark:text-gray-100  transform duration-200 cursor-pointer'
+                className='justify-center items-center flex py-6 dark:text-gray-100 transform duration-200 cursor-pointer'
                 onClick={() => {
                   router.push('/')
                 }}
