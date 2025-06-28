@@ -93,7 +93,7 @@ const Style = () => {
   position: relative;
 }
 
-/* 亮色模式样式 */
+/* 基础样式 */
 .hitokoto-content {
   display: flex;
   flex-direction: column;
@@ -102,7 +102,7 @@ const Style = () => {
 .quote-text {
   font-size: 1.1rem;
   line-height: 1.6;
-  color: #333;
+  color: #333; /* 亮色模式文本颜色 */
   margin-bottom: 4px;
   text-align: center;
   transition: all 0.3s ease;
@@ -111,7 +111,7 @@ const Style = () => {
 
 .quote-author {
   font-size: 0.9rem;
-  color: #666;
+  color: #666; /* 亮色模式作者颜色 */
   text-align: right;
   font-style: italic;
   padding-right: 15px;
@@ -125,7 +125,7 @@ const Style = () => {
   align-items: center;
   gap: 10px;
   font-size: 1rem;
-  color: #666;
+  color: #666; /* 亮色模式加载文本颜色 */
   text-align: center;
   padding: 10px;
 }
@@ -150,7 +150,7 @@ const Style = () => {
   align-items: center;
   gap: 8px;
   font-size: 1rem;
-  color: #d32f2f;
+  color: #d32f2f; /* 亮色模式错误文本颜色 */
   text-align: center;
   padding: 10px;
 }
@@ -159,38 +159,45 @@ const Style = () => {
   font-size: 1.5rem;
 }
 
-/* 暗色模式样式 */
-@media (prefers-color-scheme: dark) {
-  .quote-text {
-    color: #e2e8f0;
-  }
-  
-  .quote-author {
-    color: #a0aec0;
-  }
-  
-  .hitokoto-loading {
-    color: #a0aec0;
-  }
-  
-  .spinner {
-    border: 3px solid rgba(160, 174, 192, 0.2);
-    border-top: 3px solid #63b3ed;
-  }
-  
-  .hitokoto-error {
-    color: #fc8181;
-  }
+/* 暗色模式下的文本颜色 - 修复问题 */
+.dark .quote-text,
+.dark-mode .quote-text {
+  color: #e2e8f0 !important; /* 亮白色 */
+}
+
+.dark .quote-author,
+.dark-mode .quote-author {
+  color: #a0aec0 !important; /* 浅灰色 */
+}
+
+.dark .hitokoto-loading,
+.dark-mode .hitokoto-loading {
+  color: #cbd5e0 !important; /* 浅灰色 */
+}
+
+.dark .hitokoto-error,
+.dark-mode .hitokoto-error {
+  color: #fc8181 !important; /* 浅红色 */
 }
 
 /* 深色模式悬停效果 */
 .hitokoto-content:hover .quote-text {
-  color: #4fc0d2;
+  color: #4fc0d2; /* 亮色模式悬停颜色 */
+}
+
+.dark .hitokoto-content:hover .quote-text,
+.dark-mode .hitokoto-content:hover .quote-text {
+  color: #63b3ed !important; /* 暗色模式悬停颜色 */
 }
 
 .hitokoto-content:hover .quote-author {
-  color: #63b3ed;
+  color: #63b3ed; /* 亮色模式悬停颜色 */
   opacity: 1;
+}
+
+.dark .hitokoto-content:hover .quote-author,
+.dark-mode .hitokoto-content:hover .quote-author {
+  color: #90cdf4 !important; /* 暗色模式悬停颜色 */
 }
 
 /* 响应式设计 */
