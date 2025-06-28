@@ -11,7 +11,7 @@ const Hitokoto = () => {
       setLoading(true);
       setError(false);
       
-      const response = await fetch('https://international.v1.hitokoto.cn/?c=e&c=h&c=j');
+      const response = await fetch('https://v1.hitokoto.cn');
       const data = await response.json();
       
       setQuote({
@@ -37,9 +37,13 @@ const Hitokoto = () => {
   return (
     <div className="hitokoto-container">
       {loading ? (
-        <div className="hitokoto-loading">加载智慧箴言中...</div>
+        <div className="hitokoto-loading">
+          <div className="spinner"></div>
+          <span>加载智慧箴言...</span>
+        </div>
       ) : error ? (
         <div className="hitokoto-error">
+          <div className="error-icon">⚠️</div>
           <div className="quote-text">{quote.content}</div>
         </div>
       ) : (
