@@ -1,68 +1,67 @@
+import LazyImage from '@/components/LazyImage'
 import { useGlobal } from '@/lib/global'
+// import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect, useRef } from 'react'
-import Card from './Card'
-import SearchInput from './SearchInput'
-import TagItemMini from './TagItemMini'
+import { useRouter } from 'next/router'
 
 /**
- * 搜索页面的导航
- * @param {*} props
- * @returns
+ * 最新文章列表
+ * @param posts 所有文章数据
+ * @param sliceCount 截取展示的数量 默认6
+ * @constructor
  */
-export default function SearchNav(props) {
-  const { tagOptions, categoryOptions } = props
-  const cRef = useRef(null)
+const LatestPostsGroup = ({ latestPosts, siteInfo }) => {
+  // 获取当前路径
+  const currentPath = useRouter().asPath
   const { locale } = useGlobal()
-  useEffect(() => {
-    // 自动聚焦到搜索框
-    cRef?.current?.focus()
-  }, [])
 
-  return <>
-    <div className="my-6 px-2">
-        <SearchInput cRef={cRef} {...props} />
-        {/* 分类 */}
-        <Card className="w-full mt-4">
-            <div className="dark:text-gray-200 mb-5 mx-3">
-                <i className="mr-4 fas fa-th" />
-                {locale.COMMON.CATEGORY}:
+  if (!latestPosts) {
+    return <></>
+  }
+
+  return (
+    <>
+      <div className='mb-2 px-1 flex flex-nowrap justify-between'>
+        <div className='text-gray-800 dark:text-white'>
+          <i className='mr-2 fas fas fa-history' />
+          {locale.COMMON.LATEST_POSTS}
+        </div>
+      </div>
+      {latestPosts.map(post => {
+        const headerImage = post?.pageCoverThumbnail
+          ? post.pageCoverThumbnail
+          : siteInfo?.pageCover
+        const selected = currentPath === post?.href
+
+        return (
+          <Link
+            key={post.id}
+            title={post.title}
+            href={post?.href}
+            passHref
+            className={'my-3 flex'}>
+            <div className='w-20 h-14 overflow-hidden relative'>
+              <LazyImage
+                alt={post?.title}
+                src={`${headerImage}`}
+                className='object-cover w-full h-full'
+              />
             </div>
-            <div id="category-list" className="duration-200 flex flex-wrap mx-8">
-                {categoryOptions?.map(category => {
-                  return (
-                      <Link
-                          key={category.name}
-                          href={`/category/${category.name}`}
-                          passHref
-                          legacyBehavior>
-                          <div
-                              className={'text-gray-800 dark:text-gray-200 duration-300 dark:hover:text-white rounded-lg px-5 cursor-pointer py-2 hover:bg-indigo-400 hover:text-white'}
-                          >
-                              <i className="mr-4 fas fa-folder" />
-                              {category.name}({category.count})
-                          </div>
-                      </Link>
-                  )
-                })}
+            <div
+              className={
+                (selected ? ' text-indigo-400 ' : 'text-gray-800 dark:text-white ') + 
+                ' text-sm overflow-x-hidden hover:text-indigo-600 px-2 duration-200 w-full rounded ' +
+                ' hover:text-indigo-400 cursor-pointer items-center flex'
+              }>
+              <div>
+                <div className='line-clamp-2 menu-link'>{post.title}</div>
+                <div className='text-gray-800 dark:text-white'>{post.lastEditedDay}</div>
+              </div>
             </div>
-        </Card>
-        {/* 标签 */}
-        <Card className="w-full mt-4">
-            <div className="dark:text-gray-200 mb-5 ml-4">
-                <i className="mr-4 fas fa-tag" />
-                {locale.COMMON.TAGS}:
-            </div>
-            <div id="tags-list" className="duration-200 flex flex-wrap ml-8">
-                {tagOptions?.map(tag => {
-                  return (
-                        <div key={tag.name} className="p-2">
-                            <TagItemMini key={tag.name} tag={tag} />
-                        </div>
-                  )
-                })}
-            </div>
-        </Card>
-    </div>
-</>
+          </Link>
+        )
+      })}
+    </>
+  )
 }
+export default LatestPostsGroup
