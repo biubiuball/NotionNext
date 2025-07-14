@@ -37,10 +37,10 @@ export default function SearchNav(props) {
                           passHref
                           legacyBehavior>
                           <div
-                              className={
-                                  ' duration-300 dark:hover:text-white rounded-lg px-5 cursor-pointer py-2 hover:bg-indigo-400 hover:text-white'
-                              }
+                              className={'text-gray-800 dark:text-gray-200 duration-300 dark:hover:text-white rounded-lg px-5 cursor-pointer py-2 hover:bg-indigo-400 hover:text-white'
+                                       }
                           >
+                         </div>
                               <i className="mr-4 fas fa-folder" />
                               {category.name}({category.count})
                           </div>
