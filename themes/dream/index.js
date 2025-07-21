@@ -236,7 +236,7 @@ const LayoutArchive = props => {
   return (
     <div className='pt-8'>
       <Card className='w-full'>
-        <div className='mb-10 pb-20 bg-white md:p-12 p-3 min-h-full dark:bg-hexo-black-gray'>
+        <div className='mb-10 pb-20 bg-transparent md:p-12 p-3 min-h-full'>
           {Object.keys(archivePosts).map(archiveTitle => (
             <BlogPostArchive
               key={archiveTitle}
