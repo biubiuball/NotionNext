@@ -376,9 +376,8 @@ const LayoutCategoryIndex = props => {
                 passHref
                 legacyBehavior>
                 <div
-                  className={
-                    ' duration-300 dark:hover:text-white px-5 cursor-pointer py-2 hover:text-indigo-400'
-                  }>
+                    className={'text-gray-800 dark:text-white duration-300 dark:hover:text-white rounded-lg px-5 cursor-pointer py-2 hover:bg-indigo-400 hover:text-white'}
+                          >
                   <i className='mr-4 fas fa-folder' /> {category.name}(
                   {category.count})
                 </div>
