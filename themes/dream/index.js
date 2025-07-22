@@ -40,6 +40,46 @@ const AlgoliaSearchModal = dynamic(
   { ssr: false }
 )
 
+// 新增的Umami跟踪组件
+const UmamiTracking = () => {
+  useEffect(() => {
+    // 确保只在生产环境加载
+    if (process.env.NODE_ENV !== 'production') {
+      console.log('Umami tracking disabled in development mode');
+      return;
+    }
+
+    // 检查是否已存在脚本避免重复加载
+    if (document.querySelector('script[data-website-id="ba82fa26-8dfc-423a-8b9b-3d060f9b0691"]')) {
+      return;
+    }
+
+    // 创建并配置脚本
+    const script = document.createElement('script');
+    script.defer = true;
+    script.src = 'https://um.biubiuball.ddns-ip.net/script.js';
+    script.setAttribute('data-website-id', 'ba82fa26-8dfc-423a-8b9b-3d060f9b0691');
+    
+    // 添加跨域属性增强安全性
+    script.crossOrigin = 'anonymous';
+    
+    // 添加到文档头部
+    document.head.appendChild(script);
+    
+    // 加载完成后的回调
+    script.onload = () => {
+      console.log('Umami tracking initialized');
+    };
+    
+    // 错误处理
+    script.onerror = () => {
+      console.error('Failed to load Umami tracking script');
+    };
+  }, []);
+
+  return null; // 该组件不渲染任何内容
+};
+
 // 主题全局状态
 const ThemeGlobalHexo = createContext()
 export const useHexoGlobal = () => useContext(ThemeGlobalHexo)
@@ -91,6 +131,9 @@ const LayoutBase = props => {
 
         {/* 鼠标轨迹效果组件 */}
         <CursorFollow />
+        
+        {/* 新增的Umami跟踪组件 */}
+        <UmamiTracking />
 
         {/* 恢复背景图片容器 - 修复开始 */}
         <div className="light-bg fixed inset-0"></div>
@@ -165,6 +208,7 @@ const LayoutBase = props => {
     </ThemeGlobalHexo.Provider>
   )
 }
+
 
 /**
  * 首页
