@@ -14,7 +14,7 @@ const UmamiTracking = () => {
     // 创建并配置脚本
     const script = document.createElement('script');
     script.defer = true;
-    script.src = 'https://um.biubiuball.ddns-ip.net/script.js';
+    script.src = 'https://um.biubiuball.dpdns.org/script.js';
     script.setAttribute('data-website-id', 'ba82fa26-8dfc-423a-8b9b-3d060f9b0691');
     
     // 添加跨域属性增强安全性
