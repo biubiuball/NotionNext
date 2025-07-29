@@ -50,7 +50,7 @@ const UmamiTracking = () => {
     }
 
     // 检查是否已存在脚本避免重复加载
-    if (document.querySelector('script[data-website-id="e334a3a2-dd62-4673-8012-352968dd10c8"]')) {
+    if (document.querySelector('script[data-website-id="1161845e-7bd9-4271-85b2-be125bd91123"]')) {
       return;
     }
 
@@ -58,7 +58,7 @@ const UmamiTracking = () => {
     const script = document.createElement('script');
     script.defer = true;
     script.src = 'https://um.biubiuball.dpdns.org/script.js';
-    script.setAttribute('data-website-id', 'e334a3a2-dd62-4673-8012-352968dd10c8');
+    script.setAttribute('data-website-id', '1161845e-7bd9-4271-85b2-be125bd91123');
     
     // 添加跨域属性增强安全性
     script.crossOrigin = 'anonymous';
