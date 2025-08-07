@@ -1,0 +1,14 @@
+{
+  "name": "notion-next",
+  "type": "javascript",
+  "compatibility_date": "2023-10-05",
+  "build": {
+    "command": "npm run build"
+  },
+  "env": {
+    "production": {
+      "workers_dev": false,
+      "compatibility_date": "2023-10-05"
+    }
+  }
+}
